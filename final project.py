@@ -1,8 +1,9 @@
 # This is importing both pygame and random.
 import pygame
 import random
-#This imports everything from the settings file
+#This imports everything from the settings file and sprites file
 from Settings import *
+from sprites import *
 
 class Game:
     def __init__(self):

@@ -1,7 +1,7 @@
 # Window settings
-Width= 500 #tbd
-Height= 500 #tbd
-FPS= 30 #tbd
+Width= 400 #tbd
+Height= 600 #tbd
+FPS= 60 #tbd
 Title= "Until Death"
 
 #this is defining some colours
