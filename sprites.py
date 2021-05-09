@@ -4,8 +4,9 @@ from Settings import *
 vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, game):
         pygame.sprite.Sprite.__init__(self)
+        self.game = game
         self.image = pygame.Surface((30, 40))
         self.image.fill(Yellow)
         self.rect = self.image.get_rect()
@@ -14,8 +15,16 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
+    def jump(self):
+        # jump only if standing on a platform
+        self.rect.x += 1
+        hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
+        self.rect.x -= 1
+        if hits:
+            self.vel.y = -40
+
     def update(self):
-        self.acc = vec(0, 0)
+        self.acc = vec(0, 0.9 )
         Key= pygame.key.get_pressed()
         if Key[pygame.K_d]:
             self.acc.x = player_acc
@@ -31,5 +40,13 @@ class Player(pygame.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
-        self.rect.center = self.pos
+        self.rect.midbottom = self.pos
 
+class Platform(pygame.sprite.Sprite):
+    def __init__(self, x, y, w, h):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((w, h))
+        self.image.fill(Green)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

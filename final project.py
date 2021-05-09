@@ -6,7 +6,7 @@ from Settings import *
 from sprites import *
 
 class Game:
-    def __init__(self):
+    def __init__(self) -> object:
         #This is initiating pygame and the pygame mixer and it creates the window size.
         pygame.init()
         pygame.mixer.init()
@@ -17,9 +17,14 @@ class Game:
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
-        self.player= Player()
+        self.platforms = pygame.sprite.Group()
+        self.player = Player(self)
         self.all_sprites.add(self.player)
+        p1 = Platform(0, Height - 40, Width, 40)
+        self.all_sprites.add(p1)
+        self.platforms.add(p1)
         self.run()
+
 
 
     def run(self):
@@ -33,6 +38,12 @@ class Game:
 
     def update(self):
         self.all_sprites.update()
+        # check if player hits a platform - only if falling
+        if self.player.vel.y > 0:
+            hits = pygame.sprite.spritecollide(self.player, self.platforms, False)
+            if hits:
+                self.player.pos.y = hits[0].rect.top
+                self.player.vel.y = 0
 
     def events(self):
         #this for loop is processing events
@@ -43,6 +54,9 @@ class Game:
                     self.playing = False
                 #if they have it ends the game loop
                 self.Active= False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.player.jump()
 
     def draw(self):
         self.screen.fill(Black)
