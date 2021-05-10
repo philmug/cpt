@@ -4,6 +4,9 @@ Height= 600 #tbd
 FPS= 60 #tbd
 Title= "Until Death"
 
+#this determines the tile size
+Tilesize= 16
+
 #player properties
 player_acc = 0.5
 player_fric = -0.12

@@ -15,6 +15,10 @@ class Game:
         pygame.display.set_caption(Title)
         self.clock= pygame.time.Clock()
         self.Active = True
+        self.load_data()
+
+    def load_data(self):
+        pass
 
 
     def new(self):
@@ -70,9 +74,14 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.player.jump()
-
+    def draw_grid(self):
+        for x in range(0, Width, Tilesize):
+            pygame.draw.line(self.screen, Lightgrey, (x,0), (x,Height))
+        for y in range(0, Height, Tilesize):
+            pygame.draw.line(self.screen, Lightgrey, (0, y), (Width,y))
     def draw(self):
         self.screen.fill(Black)
+        self.draw_grid()
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
