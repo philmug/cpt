@@ -3,6 +3,7 @@ Width= 1000 #tbd
 Height= 600 #tbd
 FPS= 60 #tbd
 Title= "Until Death"
+Tilesize= 16
 
 #player properties
 player_acc = 0.5
