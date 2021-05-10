@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
             self.vel.y = -40
 
     def update(self):
-        self.acc = vec(0, 0.9 )
+        self.acc = vec(0, player_grav)
         Key= pygame.key.get_pressed()
         if Key[pygame.K_d]:
             self.acc.x = player_acc

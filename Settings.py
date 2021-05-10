@@ -7,6 +7,7 @@ Title= "Until Death"
 #player properties
 player_acc = 0.5
 player_fric = -0.12
+player_grav = 0.9
 
 #this is defining some colours
 Black= (0, 0, 0)
