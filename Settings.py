@@ -1,5 +1,5 @@
 # Window settings
-Width= 400 #tbd
+Width= 1000 #tbd
 Height= 600 #tbd
 FPS= 60 #tbd
 Title= "Until Death"
@@ -15,3 +15,5 @@ Red= (255, 0, 0)
 Green= (0, 225, 0)
 Blue= (0, 0, 255)
 Yellow= (255, 255, 0)
+Darkgrey= (40, 40, 40)
+Lightgrey= (100, 100, 100)

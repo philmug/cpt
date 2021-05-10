@@ -1,6 +1,7 @@
 # This is importing both pygame and random.
 import pygame
 import random
+import sys
 #This imports everything from the settings file and sprites file
 from Settings import *
 from sprites import *
@@ -14,6 +15,7 @@ class Game:
         pygame.display.set_caption(Title)
         self.clock= pygame.time.Clock()
         self.Active = True
+
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
@@ -44,6 +46,17 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
+
+        if self.player.rect.right >= 5*Width/6:
+            self.player.pos.x -= abs(self.player.vel.x)
+        if self.player.rect.left <= Width/6:
+            self.player.pos.x += abs(self.player.vel.x)
+        if self.player.rect.bottom <= 14*Height/15:
+            self.player.pos.y += abs(self.player.vel.y)
+        if self.player.rect.top >= Height/6:
+            self.player.pos.y -= abs(self.player.vel.y)
+
+
 
     def events(self):
         #this for loop is processing events
