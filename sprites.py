@@ -5,7 +5,8 @@ vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, game):
-        pygame.sprite.Sprite.__init__(self)
+        self.groups = game.all_sprites
+        pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((30, 40))
         self.image.fill(Yellow)
@@ -23,8 +24,15 @@ class Player(pygame.sprite.Sprite):
         if hits:
             self.vel.y = -40
 
+    def collide_with_walls(self, dx=0, dy=0):
+        for wall in self.game.walls:
+            if wall.x == self.x + dx and wall.y == self.y + dy:
+                return True
+            return False
+
+
     def update(self):
-        self.acc = vec(0, 0.9 )
+        self.acc = vec(0, player_grav)
         Key= pygame.key.get_pressed()
         if Key[pygame.K_d]:
             self.acc.x = player_acc
@@ -74,4 +82,23 @@ class Platform(pygame.sprite.Sprite):
         self.image.fill(Green)
         self.rect = self.image.get_rect()
         self.rect.x = x
+
         self.rect.y = y
+
+        self.rect.y = y
+
+class Wall(pygame.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.walls
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = pygame.Surface
+        self.image.fill((Green))
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * Tilesize
+        self.rect.y = y *Tilesize
+
+
+
