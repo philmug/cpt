@@ -1,0 +1,71 @@
+Index: final project.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># This is importing both pygame and random.\r\nimport pygame\r\nimport random\r\n#This imports everything from the settings file and sprites file\r\nfrom Settings import *\r\nfrom sprites import *\r\n\r\nclass Game:\r\n    def __init__(self):\r\n        #This is initiating pygame and the pygame mixer and it creates the window size.\r\n        pygame.init()\r\n        pygame.mixer.init()\r\n        self.screen= pygame.display.set_mode((Width, Height))\r\n        pygame.display.set_caption(Title)\r\n        self.clock= pygame.time.Clock()\r\n        self.Active = True\r\n\r\n    def new(self):\r\n        self.all_sprites = pygame.sprite.Group()\r\n        self.player= Player()\r\n        self.all_sprites.add(self.player)\r\n        self.run()\r\n\r\n\r\n    def run(self):\r\n        self.playing = True\r\n        while self.playing:\r\n            self.clock.tick(FPS)\r\n            self.events()\r\n            self.update()\r\n            self.draw()\r\n\r\n\r\n    def update(self):\r\n        self.all_sprites.update()\r\n\r\n    def events(self):\r\n        #this for loop is processing events\r\n        for event in pygame.event.get():\r\n            #this is statement checks if the player has quit\r\n            if event.type == pygame.QUIT:\r\n                if self.playing:\r\n                    self.playing = False\r\n                #if they have it ends the game loop\r\n                self.Active= False\r\n\r\n    def draw(self):\r\n        self.screen.fill(Black)\r\n        self.all_sprites.draw(self.screen)\r\n        pygame.display.flip()\r\n\r\n    def show_start_screen(self):\r\n        pass\r\n\r\n    def show_gameover_screen(self):\r\n        pass\r\n\r\n\r\ngame= Game()\r\ngame.show_start_screen()\r\nwhile game.Active:\r\n    game.new()\r\n    game.show_gameover_screen()\r\n\r\npygame.quit()\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/final project.py b/final project.py
+--- a/final project.py	(revision 7f9f0f9802c02d7849379ee9dfe20b3f8843f9e1)
++++ b/final project.py	(date 1620597725132)
+@@ -1,6 +1,7 @@
+ # This is importing both pygame and random.
+ import pygame
+ import random
++import sys
+ #This imports everything from the settings file and sprites file
+ from Settings import *
+ from sprites import *
+@@ -14,6 +15,7 @@
+         pygame.display.set_caption(Title)
+         self.clock= pygame.time.Clock()
+         self.Active = True
++        self.load_data()
+ 
+     def new(self):
+         self.all_sprites = pygame.sprite.Group()
+@@ -34,6 +36,17 @@
+     def update(self):
+         self.all_sprites.update()
+ 
++        if self.player.rect.right >= 5*Width/6:
++            self.player.pos.x -= abs(self.player.vel.x)
++        if self.player.rect.left <= Width/6:
++            self.player.pos.x += abs(self.player.vel.x)
++        if self.player.rect.bottom <= 5*Height/6:
++            self.player.pos.y -= abs(self.player.vel.y)
++        if self.player.rect.top >= Height/6:
++            self.player.pos.y += abs(self.player.vel.y)
++
++
++
+     def events(self):
+         #this for loop is processing events
+         for event in pygame.event.get():
+Index: Settings.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Window settings\r\nWidth= 400 #tbd\r\nHeight= 600 #tbd\r\nFPS= 60 #tbd\r\nTitle= \"Until Death\"\r\n\r\n#player properties\r\nplayer_acc = 0.5\r\nplayer_fric = -0.12\r\n\r\n#this is defining some colours\r\nBlack= (0, 0, 0)\r\nWhite= (255, 255, 255)\r\nRed= (255, 0, 0)\r\nGreen= (0, 225, 0)\r\nBlue= (0, 0, 255)\r\nYellow= (255, 255, 0)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Settings.py b/Settings.py
+--- a/Settings.py	(revision 7f9f0f9802c02d7849379ee9dfe20b3f8843f9e1)
++++ b/Settings.py	(date 1620597725182)
+@@ -1,5 +1,5 @@
+ # Window settings
+-Width= 400 #tbd
++Width= 1000 #tbd
+ Height= 600 #tbd
+ FPS= 60 #tbd
+ Title= "Until Death"
+@@ -14,4 +14,6 @@
+ Red= (255, 0, 0)
+ Green= (0, 225, 0)
+ Blue= (0, 0, 255)
+-Yellow= (255, 255, 0)
+\ No newline at end of file
++Yellow= (255, 255, 0)
++Darkgrey= (40, 40, 40)
++Lightgrey= (100, 100, 100)
+\ No newline at end of file
