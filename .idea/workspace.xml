@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="got the sprites and made the zombie class but it has no collision">
-      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
-    </list>
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="sprites" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620871140979</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="got the sprites and made the zombie class but it has no collision">
+      <created>1620871575657</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1620871575657</updated>
+    </task>
+    <task id="LOCAL-00014" summary="sprites">
+      <created>1620871776765</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1620871776765</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -246,7 +258,8 @@
     <MESSAGE value="finished window movement" />
     <MESSAGE value="did the intro for the tile game" />
     <MESSAGE value="got the sprites and made the zombie class but it has no collision" />
-    <option name="LAST_COMMIT_MESSAGE" value="got the sprites and made the zombie class but it has no collision" />
+    <MESSAGE value="sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="sprites" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
