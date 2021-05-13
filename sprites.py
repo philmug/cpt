@@ -68,7 +68,7 @@ class Zombie(pygame.sprite.Sprite):
 
     def update(self):
 
-        self.acc = vec(0, Zombie_grav)
+        self.acc = vec(0, player_grav)
         self.acc += self.vel * player_fric
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
@@ -82,10 +82,8 @@ class Platform(pygame.sprite.Sprite):
         self.image.fill(Green)
         self.rect = self.image.get_rect()
         self.rect.x = x
-
         self.rect.y = y
 
-        self.rect.y = y
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -98,7 +96,16 @@ class Wall(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.rect.x = x * Tilesize
-        self.rect.y = y *Tilesize
+        self.rect.y = y * Tilesize
+
+    def update(self):
+
+        self.acc = vec(0, Zombie_grav)
+        self.acc += self.vel * player_fric
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+        self.rect.midbottom = self.pos
+
 
 
 

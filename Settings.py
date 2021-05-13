@@ -23,6 +23,7 @@ Zombie_posy= 300
 Zombie_grav= 0.9
 
 
+
 #this is defining some colours
 Black= (0, 0, 0)
 White= (255, 255, 255)

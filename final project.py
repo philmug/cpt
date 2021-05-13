@@ -63,6 +63,13 @@ class Game:
         if self.player.rect.top >= Height/6:
             self.player.pos.y -= abs(self.player.vel.y)
 
+        self.all_sprites.update()
+        # check if player hits a platform - only if falling
+        hits_zombie = pygame.sprite.spritecollide(self.zombies, self.platforms, False)
+        if hits_zombie:
+            self.zombies.pos.y = hits_zombie[0].rect.top
+            self.zombies.vel.y = 0
+
 
 
     def events(self):
@@ -102,7 +109,10 @@ class Game:
         pass
 
 
-game= Game()
+
+
+
+game = Game()
 game.show_start_screen()
 while game.Active:
     game.new()
