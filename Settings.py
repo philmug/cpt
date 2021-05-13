@@ -13,13 +13,14 @@ Tilesize= 32
 #player properties
 player_acc = 0.5
 player_fric = -0.12
-player_image= 0 #wil be something like "main_hero.png"
+player_image= "L1.png" #wil be something like "main_hero.png"
 player_grav = 0.9
 
 #Zombie properties
 Zombie_image= 0 #will be something like "zombie.png"
 Zombie_posx= 500
 Zombie_posy= 300
+Zombie_grav= 0.9
 
 
 #this is defining some colours

@@ -68,12 +68,12 @@ class Zombie(pygame.sprite.Sprite):
 
     def update(self):
 
-        self.acc = vec(0, 0.9)
+        self.acc = vec(0, Zombie_grav)
         self.acc += self.vel * player_fric
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
-
         self.rect.midbottom = self.pos
+
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h):
