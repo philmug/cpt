@@ -24,8 +24,11 @@ class Game:
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
+        self.Zombies = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
+        self.zombies = Zombie(self)
+        self.all_sprites.add(self.zombies)
         p1 = Platform(0, Height - 40, Width, 40)
         self.all_sprites.add(p1)
         self.platforms.add(p1)
@@ -74,12 +77,19 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.player.jump()
+
     def draw_grid(self):
         for x in range(0, Width, Tilesize):
             pygame.draw.line(self.screen, Lightgrey, (x,0), (x,Height))
         for y in range(0, Height, Tilesize):
             pygame.draw.line(self.screen, Lightgrey, (0, y), (Width,y))
+
+
     def draw(self):
+        #remouve this later
+        pygame.display.set_caption("{:.2}".format(self.clock.get_fps()))
+
+
         self.screen.fill(Black)
         self.draw_grid()
         self.all_sprites.draw(self.screen)
