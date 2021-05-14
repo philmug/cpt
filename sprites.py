@@ -8,11 +8,10 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((30, 40))
-        self.image.fill(Yellow)
+        self.image = game.player_img
         self.rect = self.image.get_rect()
-        self.rect.center = (Width/2, Height/2)
-        self.pos = vec(Width/2, Height/2)
+        self.pos = vec(0, 0)
+        self.rect.center = self.pos
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
@@ -24,11 +23,7 @@ class Player(pygame.sprite.Sprite):
         if hits:
             self.vel.y = -40
 
-    def collide_with_walls(self, dx=0, dy=0):
-        for wall in self.game.walls:
-            if wall.x == self.x + dx and wall.y == self.y + dy:
-                return True
-            return False
+
 
 
     def update(self):
@@ -44,6 +39,31 @@ class Player(pygame.sprite.Sprite):
             self.acc.x = -2 * player_acc
         if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:
             self.acc.x = 2 * player_acc
+
+        # collision
+        collision_list = pygame.sprite.spritecollide(self, self.game.platforms, False)
+
+        for collision in collision_list:
+            if self.vel.x > 0:
+                self.vel.x = 0
+                self.rect.right = collision.rect.left
+
+            elif self.vel.x < 0:
+                self.vel.x = 0
+                self.rect.left = collision.rect.right
+
+        self.rect.y += self.vel.y + 0.5 * self.acc.y
+
+        collision_list = pygame.sprite.spritecollide(self, self.game.platforms, False)
+
+        for collision in collision_list:
+            if self.vel.y > 0:
+                self.vel.y = 0
+                self.rect.bottom = collision.rect.top
+
+            elif self.vel.y < 0:
+                self.vel.y = 0
+                self.rect.top = collision.rect.bottom
 
 
 
@@ -68,7 +88,7 @@ class Zombie(pygame.sprite.Sprite):
 
     def update(self):
 
-        self.acc = vec(0, player_grav)
+        self.acc = vec(0, Zombie_grav)
         self.acc += self.vel * player_fric
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
@@ -86,25 +106,18 @@ class Platform(pygame.sprite.Sprite):
 
 
 class Wall(pygame.sprite.Sprite):
-    def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.walls
+    def __init__(self, game, x, y, w, h):
+        self.groups = game.walls
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface
-        self.image.fill((Green))
-        self.rect = self.image.get_rect()
+        self.rect = pygame.Rect(x, y, w, h)
         self.x = x
         self.y = y
         self.rect.x = x * Tilesize
         self.rect.y = y * Tilesize
 
-    def update(self):
 
-        self.acc = vec(0, Zombie_grav)
-        self.acc += self.vel * player_fric
-        self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
-        self.rect.midbottom = self.pos
+
 
 
 
