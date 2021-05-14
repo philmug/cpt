@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="sprites">
-      <change afterPath="$PROJECT_DIR$/Camera_maps.py" afterDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="new camera system, new collision system, imported map with platforms">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Camera_maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Camera_maps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map1.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/untitled.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +228,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620926878835</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="new camera system, new collision system, imported map with platforms">
+      <created>1620955557910</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1620955557910</updated>
+    </task>
+    <task id="LOCAL-00018" summary="new camera system, new collision system, imported map with platforms">
+      <created>1620955594503</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1620955594503</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -280,7 +293,8 @@
     <MESSAGE value="did the intro for the tile game" />
     <MESSAGE value="got the sprites and made the zombie class but it has no collision" />
     <MESSAGE value="sprites" />
-    <option name="LAST_COMMIT_MESSAGE" value="sprites" />
+    <MESSAGE value="new camera system, new collision system, imported map with platforms" />
+    <option name="LAST_COMMIT_MESSAGE" value="new camera system, new collision system, imported map with platforms" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">

@@ -35,6 +35,10 @@ class camera:
     def update(self, target):
         camera_x = -target.rect.x + int(Width/2)
         camera_y = -target.rect.y + int(Height/2)
+
+
+
+
         self.camera = pygame.Rect(camera_x, camera_y, self.cameraWidth, self.cameraHeight)
 
 

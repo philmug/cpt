@@ -24,12 +24,13 @@ class Game:
         game_folder = path.dirname(__file__)
         maps_folder = path.join(game_folder, 'maps')
         img_folder = path.join(game_folder, 'img')
-        sprites_folder = path.join(img_folder, 'sprites')
-        character_folder = path.join(sprites_folder, 'character')
+        player_folder = path.join(img_folder, 'individual chracter sprites')
+        zombie_folder = path.join(img_folder,'individual enemy sprites')
         self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
         self.map_img = self.map1.Make_map()
         self.map_rect = self.map_img.get_rect()
-        self.player_img = pygame.image.load(path.join(character_folder, 'L1.png')).convert_alpha()
+        self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
+        self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
 
 
     def new(self):
@@ -39,17 +40,14 @@ class Game:
         self.Zombies = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        self.zombies = Zombie(self)
-        self.all_sprites.add(self.zombies)
-        p1 = Platform(0, Height - 40, Width, 40)
-        self.all_sprites.add(p1)
-        self.platforms.add(p1)
         for tile_object in self.map1.tmxdata.objects:
             if tile_object.name == "platform":
                 plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.platforms.add(plat_new)
             if tile_object.name == "player_spawn":
                 self.player.pos = ((tile_object.x, tile_object.y))
+            if tile_object.name == "zombie_spawn":
+                self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
         self.camera = camera(Width, Height)
         self.run()
 
@@ -66,6 +64,7 @@ class Game:
 
 
     def update(self):
+
         self.all_sprites.update()
         # check if player hits a platform - only if falling
         if self.player.vel.y > 0:
@@ -77,12 +76,12 @@ class Game:
 
         self.camera.update(self.player)
 
-        self.all_sprites.update()
         # check if player hits a platform - only if falling
-        hits_zombie = pygame.sprite.spritecollide(self.zombies, self.platforms, False)
-        if hits_zombie:
-            self.zombies.pos.y = hits_zombie[0].rect.top
-            self.zombies.vel.y = 0
+        for i in self.Zombies:
+            hits_zombie = pygame.sprite.spritecollide(i, self.platforms, False)
+            if hits_zombie:
+                i.pos.y = hits_zombie[0].rect.top
+                i.vel.y = 0
 
 
 
@@ -95,9 +94,7 @@ class Game:
                     self.playing = False
                 #if they have it ends the game loop
                 self.Active= False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    self.player.jump()
+
 
     def draw_grid(self):
         for x in range(0, Width, Tilesize):
@@ -135,5 +132,3 @@ while game.Active:
     game.show_gameover_screen()
 
 pygame.quit()
-
-
