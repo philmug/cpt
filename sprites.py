@@ -52,9 +52,22 @@ class Player(pygame.sprite.Sprite):
                 self.vel.y = 0
         # if not self.collision():
         self.acc = vec(0, player_grav)
+        Key= pygame.key.get_pressed()
         self.rect.x += 1
         hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1
+        if hits and Key[pygame.K_SPACE]:
+            self.vel.y = -20
+
+
+        if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:
+            self.acc.x = player_acc * 2
+        if Key[pygame.K_a] and Key[pygame.K_LSHIFT]:
+            self.acc.x = -player_acc * 2
+        if Key[pygame.K_a]:
+            self.acc.x = -player_acc
+        if Key[pygame.K_d]:
+            self.acc.x = player_acc
 
         self.acc += self.vel * player_fric
         self.vel += self.acc

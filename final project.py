@@ -81,7 +81,6 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
-
         self.camera.update(self.player)
 
         #check if zombie hits a platform - only if falling
