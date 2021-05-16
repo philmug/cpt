@@ -1,4 +1,5 @@
 import pygame
+from os import path
 vec = pygame.math.Vector2
 
 # Window settings
@@ -18,10 +19,8 @@ player_grav = 0.9
 
 #Zombie properties
 Zombie_image= 0 #will be something like "zombie.png"
-Zombie_posx= 500
-Zombie_posy= 300
+Zombie_acc = 0.35
 Zombie_grav= 0.9
-
 
 
 #this is defining some colours
@@ -33,3 +32,7 @@ Blue= (0, 0, 255)
 Yellow= (255, 255, 0)
 Darkgrey= (40, 40, 40)
 Lightgrey= (100, 100, 100)
+
+#map settings
+map1_height = 25 * Tilesize
+map1_length = 90 * Tilesize

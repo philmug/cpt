@@ -1,7 +1,5 @@
 # This is importing both pygame and random.
 import pygame
-import random
-import sys
 
 #This imports everything from the settings file and sprites file
 from Settings import *
@@ -33,24 +31,35 @@ class Game:
         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
 
 
+
     def new(self):
-        self.walls = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
+        self.Zombie_bar = pygame.sprite.Group()
         self.Zombies = pygame.sprite.Group()
+        self.exit = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
+        self.Plat_rect = []
         for tile_object in self.map1.tmxdata.objects:
             if tile_object.name == "platform":
                 plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.platforms.add(plat_new)
+                self.Plat_rect.append(pygame.Rect(tile_object.x, tile_object.y, tile_object.width, tile_object.height))
             if tile_object.name == "player_spawn":
                 self.player.pos = ((tile_object.x, tile_object.y))
             if tile_object.name == "zombie_spawn":
                 self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
+            if tile_object.name == "zombie_bar":
+                bar_new= Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.Zombie_bar.add(bar_new)
+            if tile_object.name == "exit":
+                exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.exit.add(exit_new)
+
         self.camera = camera(Width, Height)
         self.run()
-
+        return self.Plat_rect
 
 
 
@@ -73,10 +82,9 @@ class Game:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
 
-
         self.camera.update(self.player)
 
-        # check if player hits a platform - only if falling
+        #check if zombie hits a platform - only if falling
         for i in self.Zombies:
             hits_zombie = pygame.sprite.spritecollide(i, self.platforms, False)
             if hits_zombie:
@@ -94,7 +102,9 @@ class Game:
                     self.playing = False
                 #if they have it ends the game loop
                 self.Active= False
-
+            hit_exit = pygame.sprite.spritecollide(self.player, self.exit, False)
+            if hit_exit:
+                pygame.quit()
 
     def draw_grid(self):
         for x in range(0, Width, Tilesize):
