@@ -96,15 +96,15 @@ class Player(pygame.sprite.Sprite):
     #                 self.acc.x = 0
     #                 self.vel.x = 0
     #                 self.rect.left = hit_x[0].rect.right
-        hits = pygame.sprite.spritecollide(self.player, self. Zombies, False, collide_hit_rect)
+        hits = pygame.sprite.spritecollide(self, self.game.Zombies, False)
         for hit in hits:
-            self.player.health -= Zombie_damage
+            self.health -= Zombie_damage
             hit.vel = vec(0, 0)
-            if self.player.health <= 0:
+            if self.health <= 0:
                 self.playing = False
 
             if hits:
-                self.player.pos += vec(Zombie_knockback, 0).rotate(-hits[0].rot)
+                self.pos += vec(Zombie_knockback, 0).rotate(-hits[0].rot)
 
 
 
@@ -156,15 +156,7 @@ class Zombie(pygame.sprite.Sprite):
 
 
 class Sword(pygame.sprite.Sprite):
-    def __init__(self, game, pos, dir):
-        self.groups = game.all_sprites. Sword
-        pygame.sprite.Sprite.__init__(self, self.groups)
-        self.image = pygame.Surface(())
-        self.rect = self.image.get_rect()
-        self.pos = pos
-        self.rect.center = pos
-        self.vel = dir * Sword_speed
-        self.spawn_time = pygame.time.get_ticks()
+    pass
 
 
 class Platform(pygame.sprite.Sprite):

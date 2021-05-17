@@ -108,7 +108,7 @@ class Game:
                 i.pos.y = hits_zombie[0].rect.top
                 i.vel.y = 0
 
-        hits_zombie = pygame.sprite.groupcollide(self.Zombies, self.Sword, False, True)
+        hits = pygame.sprite.groupcollide(self.Zombies, self.Sword, False, True)
         for hit in hits:
             hit.health -= Sword_damage
             hit.vel = vec(0, 0)
