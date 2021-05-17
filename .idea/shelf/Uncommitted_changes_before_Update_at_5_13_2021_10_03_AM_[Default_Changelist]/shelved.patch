@@ -1,0 +1,86 @@
+Index: sprites.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport pygame\r\nfrom Settings import *\r\nvec = pygame.math.Vector2\r\n\r\nclass Player(pygame.sprite.Sprite):\r\n    def __init__(self, game):\r\n        self.groups = game.all_sprites\r\n        pygame.sprite.Sprite.__init__(self, self.groups)\r\n        self.game = game\r\n        self.image = pygame.Surface((30, 40))\r\n        self.image.fill(Yellow)\r\n        self.rect = self.image.get_rect()\r\n        self.rect.center = (Width/2, Height/2)\r\n        self.pos = vec(Width/2, Height/2)\r\n        self.vel = vec(0, 0)\r\n        self.acc = vec(0, 0)\r\n\r\n    def jump(self):\r\n        # jump only if standing on a platform\r\n        self.rect.x += 1\r\n        hits = pygame.sprite.spritecollide(self, self.game.platforms, False)\r\n        self.rect.x -= 1\r\n        if hits:\r\n            self.vel.y = -40\r\n\r\n    def collide_with_walls(self, dx=0, dy=0):\r\n        for wall in self.game.walls:\r\n            if wall.x == self.x + dx and wall.y == self.y + dy:\r\n                return True\r\n            return False\r\n\r\n\r\n    def update(self):\r\n        self.acc = vec(0, player_grav)\r\n        Key= pygame.key.get_pressed()\r\n        if Key[pygame.K_d]:\r\n            self.acc.x = player_acc\r\n        if Key[pygame.K_a]:\r\n            self.acc.x = -player_acc\r\n        if Key[pygame.K_a] and Key[pygame.K_LSHIFT]:\r\n            self.acc.x = -2 * player_acc\r\n        if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:\r\n            self.acc.x = 2 * player_acc\r\n\r\n\r\n        self.acc += self.vel * player_fric\r\n        self.vel += self.acc\r\n        self.pos += self.vel + 0.5 * self.acc\r\n\r\n        self.rect.midbottom = self.pos\r\n\r\nclass Platform(pygame.sprite.Sprite):\r\n    def __init__(self, x, y, w, h):\r\n        pygame.sprite.Sprite.__init__(self)\r\n        self.image = pygame.Surface((w, h))\r\n        self.image.fill(Green)\r\n        self.rect = self.image.get_rect()\r\n        self.rect.x = x\r\n        self.rect.y = y\r\n\r\nclass Wall(pygame.sprite.Sprite):\r\n    def __init__(self, game, x, y):\r\n        self.groups = game.all_sprites, game.walls\r\n        pygame.sprite.Sprite.__init__(self, self.groups)\r\n        self.game = game\r\n        self.image = pygame.Surface\r\n        self.image.fill((Green))\r\n        self.rect = self.image.get_rect()\r\n        self.x = x\r\n        self.y = y\r\n        self.rect.x = x *\r\n        self.rect.y = y *\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/sprites.py b/sprites.py
+--- a/sprites.py	(revision 3881f2e284fbb03c33f01e8a2a07a4985dab8a2a)
++++ b/sprites.py	(date 1620752795919)
+@@ -28,7 +28,7 @@
+         for wall in self.game.walls:
+             if wall.x == self.x + dx and wall.y == self.y + dy:
+                 return True
+-            return False
++        return False
+ 
+ 
+     def update(self):
+@@ -60,17 +60,17 @@
+         self.rect.y = y
+ 
+ class Wall(pygame.sprite.Sprite):
+-    def __init__(self, game, x, y):
++    def __init_(self, game, x, y):
+         self.groups = game.all_sprites, game.walls
+         pygame.sprite.Sprite.__init__(self, self.groups)
+         self.game = game
+-        self.image = pygame.Surface
++        self.image = pygame.Surface((Tilesize, Tilesize))
+         self.image.fill((Green))
+         self.rect = self.image.get_rect()
+         self.x = x
+         self.y = y
+-        self.rect.x = x *
+-        self.rect.y = y *
++        self.rect.x = x * Tilesize
++        self.rect.y = y * Tilesize
+ 
+ 
+ 
+Index: Settings.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Window settings\r\nWidth= 1000 #tbd\r\nHeight= 600 #tbd\r\nFPS= 60 #tbd\r\nTitle= \"Until Death\"\r\n\r\n#this determines the tile size\r\nTilesize= 16\r\n\r\n#player properties\r\nplayer_acc = 0.5\r\nplayer_fric = -0.12\r\nplayer_grav = 0.9\r\n\r\n#this is defining some colours\r\nBlack= (0, 0, 0)\r\nWhite= (255, 255, 255)\r\nRed= (255, 0, 0)\r\nGreen= (0, 225, 0)\r\nBlue= (0, 0, 255)\r\nYellow= (255, 255, 0)\r\nDarkgrey= (40, 40, 40)\r\nLightgrey= (100, 100, 100)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Settings.py b/Settings.py
+--- a/Settings.py	(revision 3881f2e284fbb03c33f01e8a2a07a4985dab8a2a)
++++ b/Settings.py	(date 1620700590025)
+@@ -5,7 +5,7 @@
+ Title= "Until Death"
+ 
+ #this determines the tile size
+-Tilesize= 16
++Tilesize = 16
+ 
+ #player properties
+ player_acc = 0.5
+Index: final project.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># This is importing both pygame and random.\r\nimport pygame\r\nimport random\r\nimport sys\r\n#This imports everything from the settings file and sprites file\r\nfrom Settings import *\r\nfrom sprites import *\r\n\r\nclass Game:\r\n    def __init__(self) -> object:\r\n        #This is initiating pygame and the pygame mixer and it creates the window size.\r\n        pygame.init()\r\n        pygame.mixer.init()\r\n        self.screen= pygame.display.set_mode((Width, Height))\r\n        pygame.display.set_caption(Title)\r\n        self.clock= pygame.time.Clock()\r\n        self.Active = True\r\n        self.load_data()\r\n\r\n    def load_data(self):\r\n        pass\r\n\r\n\r\n    def new(self):\r\n        self.all_sprites = pygame.sprite.Group()\r\n        self.platforms = pygame.sprite.Group()\r\n        self.player = Player(self)\r\n        self.all_sprites.add(self.player)\r\n        p1 = Platform(0, Height - 40, Width, 40)\r\n        self.all_sprites.add(p1)\r\n        self.platforms.add(p1)\r\n        self.run()\r\n\r\n\r\n\r\n    def run(self):\r\n        self.playing = True\r\n        while self.playing:\r\n            self.clock.tick(FPS)\r\n            self.events()\r\n            self.update()\r\n            self.draw()\r\n\r\n\r\n    def update(self):\r\n        self.all_sprites.update()\r\n        # check if player hits a platform - only if falling\r\n        if self.player.vel.y > 0:\r\n            hits = pygame.sprite.spritecollide(self.player, self.platforms, False)\r\n            if hits:\r\n                self.player.pos.y = hits[0].rect.top\r\n                self.player.vel.y = 0\r\n\r\n        if self.player.rect.right >= 5*Width/6:\r\n            self.player.pos.x -= abs(self.player.vel.x)\r\n        if self.player.rect.left <= Width/6:\r\n            self.player.pos.x += abs(self.player.vel.x)\r\n        if self.player.rect.bottom <= 14*Height/15:\r\n            self.player.pos.y += abs(self.player.vel.y)\r\n        if self.player.rect.top >= Height/6:\r\n            self.player.pos.y -= abs(self.player.vel.y)\r\n\r\n\r\n\r\n    def events(self):\r\n        #this for loop is processing events\r\n        for event in pygame.event.get():\r\n            #this is statement checks if the player has quit\r\n            if event.type == pygame.QUIT:\r\n                if self.playing:\r\n                    self.playing = False\r\n                #if they have it ends the game loop\r\n                self.Active= False\r\n            if event.type == pygame.KEYDOWN:\r\n                if event.key == pygame.K_SPACE:\r\n                    self.player.jump()\r\n    def draw_grid(self):\r\n        for x in range(0, Width, Tilesize):\r\n            pygame.draw.line(self.screen, Lightgrey, (x,0), (x,Height))\r\n        for y in range(0, Height, Tilesize):\r\n            pygame.draw.line(self.screen, Lightgrey, (0, y), (Width,y))\r\n    def draw(self):\r\n        self.screen.fill(Black)\r\n        self.draw_grid()\r\n        self.all_sprites.draw(self.screen)\r\n        pygame.display.flip()\r\n\r\n    def show_start_screen(self):\r\n        pass\r\n\r\n    def show_gameover_screen(self):\r\n        pass\r\n\r\n\r\ngame= Game()\r\ngame.show_start_screen()\r\nwhile game.Active:\r\n    game.new()\r\n    game.show_gameover_screen()\r\n\r\npygame.quit()\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/final project.py b/final project.py
+--- a/final project.py	(revision 3881f2e284fbb03c33f01e8a2a07a4985dab8a2a)
++++ b/final project.py	(date 1620753102335)
+@@ -27,9 +27,13 @@
+         self.player = Player(self)
+         self.all_sprites.add(self.player)
+         p1 = Platform(0, Height - 40, Width, 40)
+-        self.all_sprites.add(p1)
+-        self.platforms.add(p1)
++        p2 = Platform(0, Height - 100, Width, 70)
++        self.all_sprites.add(p1, p2)
++        self.platforms.add(p1, p2)
+         self.run()
++        self.Walls = pygame.sprite.Group
++        for x in range(10, 20):
++            Wall(self, 10,0)
+ 
+ 
+ 
