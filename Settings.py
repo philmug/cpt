@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 from os import path
 vec = pygame.math.Vector2
 
@@ -36,3 +37,11 @@ Lightgrey= (100, 100, 100)
 #map settings
 map1_height = 25 * Tilesize
 map1_length = 90 * Tilesize
+
+pygame.init()
+
+sound = pygame.mixer.Sound('lvl1.wav')
+sound.play()
+
+
+
