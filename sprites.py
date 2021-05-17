@@ -1,5 +1,7 @@
 
 import pygame
+import self as self
+
 from Settings import *
 vec = pygame.math.Vector2
 
@@ -14,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
+        self.health = player_health
 
     def jump(self):
         # jump only if standing on a platform
@@ -93,6 +96,17 @@ class Player(pygame.sprite.Sprite):
     #                 self.acc.x = 0
     #                 self.vel.x = 0
     #                 self.rect.left = hit_x[0].rect.right
+        hits = pygame.sprite.spritecollide(self.player, self. Zombies, False, collide_hit_rect)
+        for hit in hits:
+            self.player.health -= Zombie_damage
+            hit.vel = vec(0, 0)
+            if self.player.health <= 0:
+                self.playing = False
+
+            if hits:
+                self.player.pos += vec(Zombie_knockback, 0).rotate(-hits[0].rot)
+
+
 
 
 
@@ -108,7 +122,8 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
-        self.path= [x, self.end]
+        self.path = [x, self.end]
+        self.health = 50
 
     def update(self):
 
@@ -124,19 +139,42 @@ class Zombie(pygame.sprite.Sprite):
         self.vel.x += self.acc.x
         self.pos.x += self.vel.x + 0.5 * self.acc.x
 
-
-
         self.rect.midbottom = self.pos
+
+        if self.health <= 0:
+            self.kill()
+
+    def draw_health(self):
+        if self.health > 40:
+            col = Green
+        elif self.health > 20:
+            col = Yellow
+        else:
+            col = Red
+        width = int(self.rect.width * self.health / 100)
+        self.healh_bar = pygame.Rect(0, 0, width, 7)
+
+
+class Sword(pygame.sprite.Sprite):
+    def __init__(self, game, pos, dir):
+        self.groups = game.all_sprites. Sword
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.image = pygame.Surface(())
+        self.rect = self.image.get_rect()
+        self.pos = pos
+        self.rect.center = pos
+        self.vel = dir * Sword_speed
+        self.spawn_time = pygame.time.get_ticks()
 
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, x, y, w, h):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((w, h))
-        self.image.fill(Green)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+            def __init__(self, x, y, w, h):
+                pygame.sprite.Sprite.__init__(self)
+                self.image = pygame.Surface((w, h))
+                self.image.fill(Green)
+                self.rect = self.image.get_rect()
+                self.rect.x = x
+                self.rect.y = y
 
 class Zombie_bar(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h):
