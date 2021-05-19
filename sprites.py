@@ -114,10 +114,10 @@ class Player(pygame.sprite.Sprite):
             self.health -= Zombie_damage
             hit.vel = vec(0, 0)
             if self.health <= 0:
-                self.playing = False
+                self.game.playing = False
 
             if hits:
-                self.pos += vec(Zombie_knockback, 0)
+                self.pos += vec(Zombie_knockback, 2)
 
 class Arrow(pygame.sprite.Sprite):
     def __init__(self, x, y, direction):

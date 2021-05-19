@@ -10,7 +10,22 @@ from sprites import *
 from os import path
 from Camera_maps import *
 
-
+def draw_player_health(surf, x, y, pct):
+    if pct < 0:
+        pct = 0
+    Bar_length = 100
+    Bar_height = 20
+    fill = pct * Bar_length
+    outline_rect = pygame.Rect(x, y, Bar_length, Bar_height)
+    fill_rect = pygame.Rect(x, y, fill, Bar_height)
+    if pct > 100:
+        col = Green
+    elif pct > 60:
+        col = Yellow
+    else:
+        col = Red
+    pygame.draw.rect(surf, col, fill_rect)
+    pygame.draw.rect(surf, White, outline_rect, 2)
 
 
 class Game:
@@ -132,7 +147,7 @@ class Game:
             if isinstance(sprite, Zombie):
                 sprite.draw_health()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
-
+        draw_player_health(self.screen, 10, 10, self.player.health / player_health)
         pygame.display.flip()
 
     def show_start_screen(self):
