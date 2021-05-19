@@ -10,11 +10,6 @@ class maps:
         self.map_height = tm.height * tm.tileheight
         self.tmxdata = tm
 
-    def map_y(self):
-        return self.map_height
-
-    def map_x(self):
-        return self.map_width
 
     def render(self, surface):
         ti = self.tmxdata.get_tile_image_by_gid
