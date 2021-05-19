@@ -17,6 +17,16 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.health = player_health
+        self.idling = False
+        self.idling_counter = 0
+        self.animation_list = []
+
+    def shoot(self):
+        if self.shoot_cooldown == 0 and self.ammo > 0:
+            self.shoot_cooldown = 20
+            bullet = Bullet(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,
+                            self.direction)
+            bullet_group.add(bullet)
 
     def jump(self):
         # jump only if standing on a platform
