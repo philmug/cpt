@@ -24,37 +24,12 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
         if self.shoot_cooldown == 0 and self.ammo > 0:
             self.shoot_cooldown = 20
-            bullet = Bullet(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,
+            bullet = bullet(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,
                             self.direction)
             bullet_group.add(bullet)
 
-class Arrow(pygame.sprite.Sprite):
-    def __init__(self, x, y, direction):
-        pygame.sprite.Sprite.__init__(self)
-        self.speed = 10
-        self.image = arrow.png
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
-        self.direction = direction
 
-    def update(self):
-        # move arrow
-        self.rect.x += (self.direction * self.speed) + screen_scroll
-        # check for collision with level
-        for tile in world.obstacle_list:
-            if tile[1].colliderect(self.rect):
-                self.kill()
 
-        # check collision with characters
-        if pygame.sprite.spritecollide(player, arrow_group, False):
-            if player.alive:
-                player.health -= 5
-                self.kill()
-        for enemy in enemy_group:
-            if pygame.sprite.spritecollide(enemy, arrow_group, False):
-                if enemy.alive:
-                    enemy.health -= 25
-                    self.kill()
 
     def jump(self):
         # jump only if standing on a platform
@@ -142,9 +117,35 @@ class Arrow(pygame.sprite.Sprite):
                 self.playing = False
 
             if hits:
-                self.pos += vec(Zombie_knockback, 0).rotate(-hits[0].rot)
+                self.pos += vec(Zombie_knockback, 0)
 
+class Arrow(pygame.sprite.Sprite):
+    def __init__(self, x, y, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.speed = 10
+        self.image = arrow.png
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.direction = direction
 
+    def update(self):
+        # move arrow
+        self.rect.x += (self.direction * self.speed) + screen_scroll
+        # check for collision with level
+        for tile in world.obstacle_list:
+            if tile[1].colliderect(self.rect):
+                self.kill()
+
+        # check collision with characters
+        if pygame.sprite.spritecollide(player, arrow_group, False):
+            if player.alive:
+                player.health -= 5
+                self.kill()
+        for enemy in enemy_group:
+            if pygame.sprite.spritecollide(enemy, arrow_group, False):
+                if enemy.alive:
+                    enemy.health -= 25
+                    self.kill()
 
 
 
@@ -193,12 +194,11 @@ class Zombie(pygame.sprite.Sprite):
         self.healh_bar = pygame.Rect(0, 0, width, 7)
 
 
-class Sword(pygame.sprite.Sprite):
-    pass
+
 
 
 class Platform(pygame.sprite.Sprite):
-            def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h):
                 pygame.sprite.Sprite.__init__(self)
                 self.image = pygame.Surface((w, h))
                 self.image.fill(Green)
@@ -224,6 +224,15 @@ class Exit(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
+class Wall(pygame.sprite.Sprite):
+    def init(self, x, y, w, h):
+        pygame.sprite.Sprite.init(self)
+        self.image = pygame.Surface((w, h))
+        self.image.fill(Green)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 
 

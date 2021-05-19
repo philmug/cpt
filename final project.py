@@ -10,22 +10,7 @@ from sprites import *
 from os import path
 from Camera_maps import *
 
-def draw_player_health(surf, x, y, pct):
-    if pct < 0:
-        pct = 0
-    Bar_length = 100
-    Bar_height = 20
-    fill = pct * Bar_length
-    outline_rect = pygame.Rect(x, y, Bar_length, Bar_height)
-    fill_rect = pygame.Rect(x, y, fill, Bar_height)
-    if pct > 100:
-        col = Green
-    elif pct > 60:
-        col = Yellow
-    else:
-        col = Red
-    pygame.draw.rect(surf, col, fill_rect)
-    pygame.draw.rect(surf, White, outline_rect, 2)
+
 
 
 class Game:
@@ -78,9 +63,6 @@ class Game:
             if tile_object.name == "exit":
                 exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.exit.add(exit_new)
-            if tile_object.name == "wall":
-                wall_new = Wall(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.Walls.add(wall_new)
 
         self.camera = camera(Width, Height)
         self.run()
@@ -115,11 +97,6 @@ class Game:
                 i.pos.y = hits_zombie[0].rect.top
                 i.vel.y = 0
 
-        hits = pygame.sprite.groupcollide(self.Zombies, self.Sword, False, True)
-        for hit in hits:
-            hit.health -= Sword_damage
-            hit.vel = vec(0, 0)
-
 
 
 
@@ -152,10 +129,10 @@ class Game:
         self.draw_grid()
         self.screen.blit(self.map_img, self.camera.applyRect(self.map_rect))
         for sprite in self.all_sprites:
-            if isinstance(sprite, Zombies):
+            if isinstance(sprite, Zombie):
                 sprite.draw_health()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
-        draw_player_health(self.screen, 10, 10, self.player.health / player_health)
+
         pygame.display.flip()
 
     def show_start_screen(self):
