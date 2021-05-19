@@ -1,5 +1,8 @@
-# This is importing both pygame and random.
 import pygame
+from pygame import mixer
+import random
+import os
+import csv
 
 #This imports everything from the settings file and sprites file
 from Settings import *
@@ -161,8 +164,43 @@ class Game:
     def show_gameover_screen(self):
         pass
 
+    def shoot(self):
+        if self.shoot_cooldown == 0 and self.ammo > 0:
+            self.shoot_cooldown = 20
+            arrow = Arrow(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,
+                            self.direction)
+            arrow_group.add(arrow)
 
+class Arrow(pygame.sprite.Sprite):
+	def __init__(self, x, y, direction):
+		pygame.sprite.Sprite.__init__(self)
+		self.speed = 10
+		self.image = arrow.png
+		self.rect = self.image.get_rect()
+		self.rect.center = (x, y)
+		self.direction = direction
 
+	def update(self):
+		#move arrow
+		self.rect.x += (self.direction * self.speed) + screen_scroll
+		#check if arrow has gone off screen
+		if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
+			self.kill()
+		#check for collision with level
+		for tile in world.obstacle_list:
+			if tile[1].colliderect(self.rect):
+				self.kill()
+
+		#check collision with characters
+		if pygame.sprite.spritecollide(player, arrow_group, False):
+			if player.alive:
+				player.health -= 5
+				self.kill()
+		for enemy in enemy_group:
+			if pygame.sprite.spritecollide(enemy, arrow_group, False):
+				if enemy.alive:
+					enemy.health -= 25
+					self.kill()
 
 
 game = Game()

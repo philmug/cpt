@@ -1,6 +1,7 @@
 
 import pygame
-from Camera_maps import *
+import self as self
+
 from Settings import *
 vec = pygame.math.Vector2
 
@@ -15,64 +16,63 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
-        self.pos_y = 0
-        self.pos_x = 0
-        self.load_data()
-        self.collition= False
+        self.health = player_health
+        self.idling = False
+        self.idling_counter = 0
+        self.animation_list = []
 
-    def load_data(self):
-        game_folder = path.dirname(__file__)
-        maps_folder = path.join(game_folder, 'maps')
-        self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
-        self.Plat_rect = []
-        for tile_object in self.map1.tmxdata.objects:
-            if tile_object.name == "platform":
-                self.Plat_rect.append(tile_object.x)
-                self.Plat_rect.append(tile_object.y)
+    def shoot(self):
+        if self.shoot_cooldown == 0 and self.ammo > 0:
+            self.shoot_cooldown = 20
+            bullet = Bullet(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,
+                            self.direction)
+            bullet_group.add(bullet)
+
+    def jump(self):
+        # jump only if standing on a platform
+        self.rect.x += 1
+        hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
+        self.rect.x -= 1
+        if hits:
+            self.vel.y = -40
+
 
 
     def update(self):
-        self.ground = True
+        self.acc = vec(0, player_grav)
         self.rect.x += 1
         hit_y = pygame.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1
+        self.ground = True
 
-        while hit_y:
-            if self.vel.y > 0:
-                self.rect.bottom = hit_y[0].rect.top
-                self.vel.y = 0
-                self.ground = True
-            if self.vel.y < 0:
-                self.vel.y = 0
-                self.rect.top = hit_y[0].rect.bottom
-        else:
-            self.ground = False
-            self.acc = vec(0, player_grav)
+        # if self.ground == False and Key[pygame.K_SPACE]:
+        #     self.vel.y = -20
         #
-        # hit_x = pygame.sprite.spritecollide(self, self.game.platforms, False)
-        # if hit_x:
-        #     if self.vel.x > 0:
-        #         self.acc.x = 0
-        #         self.vel.x = 0
-        #         self.rect.right = hit_x[0].rect.left
-        #         print('Hit')
-        #     if self.vel.x < 0:
-        #         self.acc.x = 0
-        #         self.vel.x = 0
-        #         self.rect.left = hit_x[0].rect.right
+        # if hit_y:
+        #     if self.vel.y > 0:
+        #         self.vel.y = 0
+        #         self.rect.bottom = hit_y[0].rect.top
+        #         self.ground = True
+        #     if self.vel.y < 0:
+        #         self.vel.y = 0
+        #         self.rect.top = hit_y[0].rect.bottom
+        # else:
+        #     self.ground = False
 
-
+        if self.vel.y > 0:
+            hit_y = pygame.sprite.spritecollide(self, self.game.platforms, False)
+            if hit_y:
+                self.vel.y = 0
         # if not self.collision():
         self.acc = vec(0, player_grav)
         Key= pygame.key.get_pressed()
         self.rect.x += 1
         hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
+        self.rect.x -= 1
+        if hits and Key[pygame.K_SPACE]:
+            self.vel.y = -20
 
-        # self.rect.x -= 1
-        # if hits and Key[pygame.K_SPACE]:
-        #     self.vel.y = -20
-        #
-        #
+
         if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:
             self.acc.x = player_acc * 2
         if Key[pygame.K_a] and Key[pygame.K_LSHIFT]:
@@ -106,35 +106,18 @@ class Player(pygame.sprite.Sprite):
     #                 self.acc.x = 0
     #                 self.vel.x = 0
     #                 self.rect.left = hit_x[0].rect.right
+        hits = pygame.sprite.spritecollide(self, self.game.Zombies, False)
+        for hit in hits:
+            self.health -= Zombie_damage
+            hit.vel = vec(0, 0)
+            if self.health <= 0:
+                self.playing = False
 
-        # Key= pygame.key.get_pressed()
-        # hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
-        # i = 1
-        # while self.Plat_rect:
-        #     if self.Plat_rect[i] == self.pos_y:
-        #         if self.Plat_rect[i-1] == self.pos_x or self.Plat_rect[i-1] == self.pos_x + Tilesize:
-        #             self.collition = True
-        #     i += 2
-        # for platform in self.Plat_rect:
-        #     if platform.x == self.pos.x + self.vel.x and platform.y == self.pos.y+ self.vel.y:
-        #        self.collition = True
-        #     self.collition = False
+            if hits:
+                self.pos += vec(Zombie_knockback, 0).rotate(-hits[0].rot)
 
-        # if self.collition == False:
-        #     self.vel.y = 0.9
-        #     if hits and Key[pygame.K_SPACE]:
-        #         self.vel.y = -20
-        #     if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:
-        #         self.vel.x = player_vel * 2
-        #     if Key[pygame.K_a] and Key[pygame.K_LSHIFT]:
-        #         self.vel.x = -player_vel * 2
-        #     if Key[pygame.K_a]:
-        #         self.vel.x = -player_vel
-        #     if Key[pygame.K_d]:
-        #         self.vel.x = player_vel
-        #
-        #     self.pos += self.vel
-        #     self.rect.midbottom = self.pos
+
+
 
 
 class Zombie(pygame.sprite.Sprite):
@@ -149,34 +132,51 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
-        self.path= [x, self.end]
+        self.path = [x, self.end]
+        self.health = 50
 
     def update(self):
 
-        hit_bar= pygame.sprite.spritecollide(self, self.game.platforms, False)
-
-        # if hit_bar:
-        #     self.acc.x = -self.acc.x
-        # else:
-        #     self.acc.x = Zombie_acc
         self.acc.y = Zombie_grav
         self.acc.y += self.vel.y * player_fric
         self.vel.y += self.acc.y
         self.pos.y += self.vel.y + 0.5 * self.acc.y
+        if self.pos.x <= self.path[0]:
+            self.acc.x = 0.5
+        elif self.pos.x >= self.path[1]:
+            self.acc.x = -0.5
         self.acc.x += self.vel.x * player_fric
         self.vel.x += self.acc.x
         self.pos.x += self.vel.x + 0.5 * self.acc.x
+
         self.rect.midbottom = self.pos
+
+        if self.health <= 0:
+            self.kill()
+
+    def draw_health(self):
+        if self.health > 40:
+            col = Green
+        elif self.health > 20:
+            col = Yellow
+        else:
+            col = Red
+        width = int(self.rect.width * self.health / 100)
+        self.healh_bar = pygame.Rect(0, 0, width, 7)
+
+
+class Sword(pygame.sprite.Sprite):
+    pass
 
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, x, y, w, h):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((w, h))
-        self.image.fill(Green)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+            def __init__(self, x, y, w, h):
+                pygame.sprite.Sprite.__init__(self)
+                self.image = pygame.Surface((w, h))
+                self.image.fill(Green)
+                self.rect = self.image.get_rect()
+                self.rect.x = x
+                self.rect.y = y
 
 class Zombie_bar(pygame.sprite.Sprite):
     def __init__(self, x, y, w, h):
@@ -196,14 +196,7 @@ class Exit(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-class Wall(pygame.sprite.Sprite):
-    def __init__(self, x, y, w, h):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((w, h))
-        self.image.fill(Green)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+
 
 
 

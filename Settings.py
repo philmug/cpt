@@ -20,6 +20,11 @@ player_image= "L1.png" #wil be something like "main_hero.png"
 player_grav = 0.9
 player_vel = 1
 
+#define player actions
+moving_left = False
+moving_right = False
+shoot = False
+
 #Weapon settings
 Sword_image = ()
 Sword_speed = 500
@@ -48,8 +53,12 @@ Lightgrey= (100, 100, 100)
 map1_height = 25 * Tilesize
 map1_length = 90 * Tilesize
 
+#loads images
+bullet_img = pygame.image.load('img/new character/arrow.png')
+
 pygame.init()
 
+#adds music and volume
 sound = pygame.mixer.Sound('lvl1.wav')
 sound.play()
 
