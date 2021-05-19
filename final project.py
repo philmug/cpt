@@ -53,6 +53,7 @@ class Game:
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
+        self.Walls = pygame.sprite.Group()
         self.Zombie_bar = pygame.sprite.Group()
         self.Zombies = pygame.sprite.Group()
         self.exit = pygame.sprite.Group()
@@ -74,6 +75,9 @@ class Game:
             if tile_object.name == "exit":
                 exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.exit.add(exit_new)
+            if tile_object.name == "wall":
+                wall_new = Wall(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.Walls.add(wall_new)
 
         self.camera = camera(Width, Height)
         self.run()
@@ -112,6 +116,7 @@ class Game:
         for hit in hits:
             hit.health -= Sword_damage
             hit.vel = vec(0, 0)
+
 
 
 

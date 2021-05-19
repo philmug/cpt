@@ -18,6 +18,7 @@ player_acc = 0.5
 player_fric = -0.12
 player_image= "L1.png" #wil be something like "main_hero.png"
 player_grav = 0.9
+player_vel = 1
 
 #Weapon settings
 Sword_image = ()
