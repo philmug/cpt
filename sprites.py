@@ -40,9 +40,6 @@ class Arrow(pygame.sprite.Sprite):
     def update(self):
         # move arrow
         self.rect.x += (self.direction * self.speed) + screen_scroll
-        # check if arrow has gone off screen
-        if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
-            self.kill()
         # check for collision with level
         for tile in world.obstacle_list:
             if tile[1].colliderect(self.rect):
