@@ -32,7 +32,7 @@ Sword_damage = 10
 
 #Zombie properties
 Zombie_image= 0 #will be something like "zombie.png"
-Zombie_acc = 0.35
+Zombie_acc = 0.75
 Zombie_grav= 0.9
 Zombie_health = 50
 Zombie_damage = 10

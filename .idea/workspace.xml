@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="working code">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m___Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/Map2.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m___Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_10_03_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_10_03_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM_[Default_Changelist]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_10_04_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_10_04_AM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_1_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_1_10_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" afterDir="false" />
@@ -14,6 +16,155 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Cat 01-1r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Cat-01-2r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Cat-01-3r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Dog 01-1r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Dog-01-2r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Animal/Dog-01-3r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Male/pipo-charachip_otaku01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Male/pipo-charachip_soldier01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Add Characters Aug2020/Xmas/pipo-xmaschara06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student fmale 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 1/su1 Student male 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student fmale 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 2/su2 Student male 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student fmale 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 3/su3 Student male 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student fmale 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/school uniform 4/su4 Student male 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Headmaster fmale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Headmaster male.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher fmale 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher fmale 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher fmale 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher fmale 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher male 01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher male 02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher male 03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Japanese school characters/teachers/Teacher male 04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,8 +197,10 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/sprites.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/final project.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Settings.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -64,7 +217,7 @@
     <option name="height" value="688" />
   </component>
   <component name="ProjectId" id="1s3HsluODBUyzRA1SyLRc4HcHOd" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">

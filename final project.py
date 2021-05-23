@@ -58,11 +58,14 @@ class Game:
             if tile_object.name == "zombie_spawn":
                 self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
             if tile_object.name == "zombie_bar":
-                bar_new= Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.Zombie_bar.add(bar_new)
             if tile_object.name == "exit":
-                exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.exit.add(exit_new)
+            if tile_object.name == "wall":
+                wall_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.Walls.add(wall_new)
 
         self.camera = camera(Width, Height)
         self.run()
