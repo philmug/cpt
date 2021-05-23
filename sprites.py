@@ -227,14 +227,16 @@ class Exit(pygame.sprite.Sprite):
         self.rect.y = y
 
 
-class Wall(pygame.sprite.Sprite):
-    def init(self, x, y, w, h):
-        pygame.sprite.Sprite.init(self)
-        self.image = pygame.Surface((w, h))
-        self.image.fill(Green)
+class Coin(pygame.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.coin
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = game.coin_img
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.end = x + (Tilesize *2)
+        self.pos = vec(x, y)
+        self.rect.topleft = self.pos
 
 
 

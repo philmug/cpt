@@ -28,13 +28,16 @@ class Game:
         game_folder = path.dirname(__file__)
         maps_folder = path.join(game_folder, 'maps')
         img_folder = path.join(game_folder, 'img')
+        sprites_folder = path.join(img_folder, 'sprites')
         player_folder = path.join(img_folder, 'individual chracter sprites')
         zombie_folder = path.join(img_folder,'individual enemy sprites')
+        items_folder = path.join(sprites_folder, 'extra items')
         self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
         self.map_img = self.map1.Make_map()
         self.map_rect = self.map_img.get_rect()
         self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
+        self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
 
 
 
@@ -45,6 +48,7 @@ class Game:
         self.Zombie_bar = pygame.sprite.Group()
         self.Zombies = pygame.sprite.Group()
         self.exit = pygame.sprite.Group()
+        self.coin = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
         self.Plat_rect = []
@@ -63,9 +67,8 @@ class Game:
             if tile_object.name == "exit":
                 exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                 self.exit.add(exit_new)
-            if tile_object.name == "wall":
-                wall_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.Walls.add(wall_new)
+            if tile_object.name == "coin_spawn":
+                self.coin.add(Coin(self, tile_object.x, tile_object.y ))
 
         self.camera = camera(Width, Height)
         self.run()
