@@ -109,7 +109,7 @@ class Player(pygame.sprite.Sprite):
             self.health -= Spike_damage
             if self.health <= 0:
                 self.game.playing = False
-
+# score ribbon
         coin_hits = pygame.sprite.spritecollide(self, self.game.coin, True)
         if coin_hits:
             self.score += coin_score
