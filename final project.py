@@ -44,7 +44,7 @@ class Game:
         maps_folder = path.join(game_folder, 'maps')
         img_folder = path.join(game_folder, 'img')
         sprites_folder = path.join(img_folder, 'sprites')
-        player_folder = path.join(img_folder, 'individual chracter sprites')
+        player_folder = path.join(img_folder, 'Hero')
         zombie_folder = path.join(img_folder,'individual enemy sprites')
         items_folder = path.join(sprites_folder, 'extra items')
         self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
@@ -53,7 +53,7 @@ class Game:
         self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
         self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
-
+        self.bullet_img = pygame.image.load(path.join(items_folder, 'arrow_silver.png')).convert_alpha()
 
 
     def new(self):
@@ -64,6 +64,7 @@ class Game:
         self.Zombies = pygame.sprite.Group()
         self.exit = pygame.sprite.Group()
         self.coin = pygame.sprite.Group()
+        self.Spikes = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
         self.Plat_rect = []
@@ -84,6 +85,9 @@ class Game:
                 self.exit.add(exit_new)
             if tile_object.name == "coin_spawn":
                 self.coin.add(Coin(self, tile_object.x, tile_object.y ))
+            if tile_object.name == "spike":
+                Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.Spikes.add(Spikes_new)
 
         self.camera = camera(Width, Height)
         self.run()

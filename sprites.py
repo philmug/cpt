@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.idling = False
         self.idling_counter = 0
         self.animation_list = []
+        self.score = 0
 
     def wallCollisions(self, platforms):
         for wall in platforms:
@@ -94,18 +95,34 @@ class Player(pygame.sprite.Sprite):
             self.health -= Zombie_damage
             hit.vel = vec(0, 0)
             if self.health <= 0:
-                self.playing = False
+                self.game.playing = False
+
+
 
             if hits and self.vel.x <= 0:
                 self.pos += vec(Zombie_knockback, 0)
             if hits and self.vel.x >= 0:
                 self.pos += vec(-Zombie_knockback, 0)
 
+        Spikes_hits = pygame.sprite.spritecollide(self, self.game.Spikes, False)
+        if Spikes_hits:
+            self.health -= Spike_damage
+            if self.health <= 0:
+                self.game.playing = False
+
+        coin_hits = pygame.sprite.spritecollide(self, self.game.coin, True)
+        if coin_hits:
+            self.score += coin_score
+            print(self.score)
+
+
+
 class Arrow(pygame.sprite.Sprite):
-    def __init__(self, x, y, direction):
+    def __init__(self, game, x, y, direction):
         pygame.sprite.Sprite.__init__(self)
         self.speed = 10
-        self.image = "arrow.png"
+        self.game = game
+        self.image = game.bullet_img
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.direction = direction
@@ -238,7 +255,14 @@ class Coin(pygame.sprite.Sprite):
         self.pos = vec(x, y)
         self.rect.topleft = self.pos
 
-
+class Spikes(pygame.sprite.Sprite):
+    def __init__(self, x, y, w, h):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((w, h))
+        self.image.fill(Green)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 
 

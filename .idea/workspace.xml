@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="got both collision and zombie movement working">
-      <change afterPath="$PROJECT_DIR$/maps/coin_gold.tsx" afterDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="working code">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-19_12_08_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-19_12_08_p_m___Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,10 +39,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/sprites.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/final project.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Settings.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/final project.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -58,7 +57,7 @@
     <option name="height" value="688" />
   </component>
   <component name="ProjectId" id="1s3HsluODBUyzRA1SyLRc4HcHOd" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -292,19 +291,19 @@
       <option name="project" value="LOCAL" />
       <updated>1621433034297</updated>
     </task>
-    <task id="LOCAL-00024" summary="got both collision and zombie movement working">
-      <created>1621802265689</created>
+    <task id="LOCAL-00024" summary="working code">
+      <created>1621440302343</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1621802265689</updated>
+      <updated>1621440302343</updated>
     </task>
-    <task id="LOCAL-00025" summary="got both collision and zombie movement working">
-      <created>1621802312654</created>
+    <task id="LOCAL-00025" summary="working code">
+      <created>1621440901066</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1621802312654</updated>
+      <updated>1621440901066</updated>
     </task>
     <option name="localTasksCounter" value="26" />
     <servers />
@@ -363,8 +362,8 @@
     <MESSAGE value="tried to do collision and zombie movement but failed, I got the exit thoug" />
     <MESSAGE value="added player and zombie heatlh" />
     <MESSAGE value="added new sprites, added arrow class as well as what happens when it collides with the map, an enemy, goes off screen, etc." />
-    <MESSAGE value="got both collision and zombie movement working" />
-    <option name="LAST_COMMIT_MESSAGE" value="got both collision and zombie movement working" />
+    <MESSAGE value="working code" />
+    <option name="LAST_COMMIT_MESSAGE" value="working code" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">

@@ -35,9 +35,14 @@ Zombie_image= 0 #will be something like "zombie.png"
 Zombie_acc = 0.75
 Zombie_grav= 0.9
 Zombie_health = 50
-Zombie_damage = 10
+Zombie_damage = 2
 Zombie_knockback = 2
 
+#coin properties
+coin_score = 10
+
+#Spike properties
+Spike_damage = 10
 
 #this is defining some colours
 Black= (0, 0, 0)
@@ -52,9 +57,6 @@ Lightgrey= (100, 100, 100)
 #map settings
 map1_height = 25 * Tilesize
 map1_length = 90 * Tilesize
-
-#loads images
-bullet_img = pygame.image.load('img/new character/arrow.png')
 
 pygame.init()
 
