@@ -1,0 +1,206 @@
+Index: final project.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import pygame\r\nfrom pygame import mixer\r\nimport random\r\nimport os\r\nimport csv\r\n\r\n#This imports everything from the settings file and sprites file\r\nfrom Settings import *\r\nfrom sprites import *\r\nfrom os import path\r\nfrom Camera_maps import *\r\n\r\ndef draw_player_health(surf, x, y, pct):\r\n    if pct < 0:\r\n        pct = 0\r\n    Bar_length = 100\r\n    Bar_height = 20\r\n    fill = pct * Bar_length\r\n    outline_rect = pygame.Rect(x, y, Bar_length, Bar_height)\r\n    fill_rect = pygame.Rect(x, y, fill, Bar_height)\r\n    if pct > 100:\r\n        col = Green\r\n    elif pct > 60:\r\n        col = Yellow\r\n    else:\r\n        col = Red\r\n    pygame.draw.rect(surf, col, fill_rect)\r\n    pygame.draw.rect(surf, White, outline_rect, 2)\r\n\r\n\r\nclass Game:\r\n    def __init__(self) -> object:\r\n        #This is initiating pygame and the pygame mixer and it creates the window size.\r\n        pygame.init()\r\n        pygame.mixer.init()\r\n        self.screen= pygame.display.set_mode((Width, Height))\r\n        pygame.display.set_caption(Title)\r\n        self.clock= pygame.time.Clock()\r\n        self.Active = True\r\n        self.load_data()\r\n\r\n    def load_data(self):\r\n        game_folder = path.dirname(__file__)\r\n        maps_folder = path.join(game_folder, 'maps')\r\n        img_folder = path.join(game_folder, 'img')\r\n        player_folder = path.join(img_folder, 'individual chracter sprites')\r\n        zombie_folder = path.join(img_folder,'individual enemy sprites')\r\n        self.map1= maps(path.join(maps_folder, 'Map1.tmx'))\r\n        self.map_img = self.map1.Make_map()\r\n        self.map_rect = self.map_img.get_rect()\r\n        self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()\r\n        self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()\r\n\r\n\r\n\r\n    def new(self):\r\n        self.all_sprites = pygame.sprite.Group()\r\n        self.platforms = pygame.sprite.Group()\r\n        self.Walls = pygame.sprite.Group()\r\n        self.Zombie_bar = pygame.sprite.Group()\r\n        self.Zombies = pygame.sprite.Group()\r\n        self.exit = pygame.sprite.Group()\r\n        self.player = Player(self)\r\n        self.all_sprites.add(self.player)\r\n        self.Plat_rect = []\r\n        for tile_object in self.map1.tmxdata.objects:\r\n            if tile_object.name == \"platform\":\r\n                plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)\r\n                self.platforms.add(plat_new)\r\n                self.Plat_rect.append(pygame.Rect(tile_object.x, tile_object.y, tile_object.width, tile_object.height))\r\n            if tile_object.name == \"player_spawn\":\r\n                self.player.pos = ((tile_object.x, tile_object.y))\r\n            if tile_object.name == \"zombie_spawn\":\r\n                self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))\r\n            if tile_object.name == \"zombie_bar\":\r\n                bar_new= Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)\r\n                self.Zombie_bar.add(bar_new)\r\n            if tile_object.name == \"exit\":\r\n                exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)\r\n                self.exit.add(exit_new)\r\n            if tile_object.name == \"wall\":\r\n                wall_new = Wall(tile_object.x, tile_object.y, tile_object.width, tile_object.height)\r\n                self.Walls.add(wall_new)\r\n\r\n        self.camera = camera(Width, Height)\r\n        self.run()\r\n        return self.Plat_rect\r\n\r\n\r\n\r\n    def run(self):\r\n        self.playing = True\r\n        while self.playing:\r\n            self.clock.tick(FPS)\r\n            self.events()\r\n            self.update()\r\n            self.draw()\r\n\r\n\r\n    def update(self):\r\n\r\n        self.all_sprites.update()\r\n        # check if player hits a platform - only if falling\r\n        if self.player.vel.y > 0:\r\n            hits = pygame.sprite.spritecollide(self.player, self.platforms, False)\r\n            if hits:\r\n                self.player.pos.y = hits[0].rect.top\r\n                self.player.vel.y = 0\r\n        self.camera.update(self.player)\r\n\r\n        #check if zombie hits a platform - only if falling\r\n        for i in self.Zombies:\r\n            hits_zombie = pygame.sprite.spritecollide(i, self.platforms, False)\r\n            if hits_zombie:\r\n                i.pos.y = hits_zombie[0].rect.top\r\n                i.vel.y = 0\r\n\r\n        hits = pygame.sprite.groupcollide(self.Zombies, self.Sword, False, True)\r\n        for hit in hits:\r\n            hit.health -= Sword_damage\r\n            hit.vel = vec(0, 0)\r\n\r\n\r\n\r\n\r\n    def events(self):\r\n        #this for loop is processing events\r\n        for event in pygame.event.get():\r\n            #this is statement checks if the player has quit\r\n            if event.type == pygame.QUIT:\r\n                if self.playing:\r\n                    self.playing = False\r\n                #if they have it ends the game loop\r\n                self.Active= False\r\n            hit_exit = pygame.sprite.spritecollide(self.player, self.exit, False)\r\n            if hit_exit:\r\n                pygame.quit()\r\n\r\n    def draw_grid(self):\r\n        for x in range(0, Width, Tilesize):\r\n            pygame.draw.line(self.screen, Lightgrey, (x,0), (x,Height))\r\n        for y in range(0, Height, Tilesize):\r\n            pygame.draw.line(self.screen, Lightgrey, (0, y), (Width,y))\r\n\r\n\r\n    def draw(self):\r\n        #remouve this later\r\n        pygame.display.set_caption(\"{:.2}\".format(self.clock.get_fps()))\r\n\r\n\r\n        self.screen.fill(Black)\r\n        self.draw_grid()\r\n        self.screen.blit(self.map_img, self.camera.applyRect(self.map_rect))\r\n        for sprite in self.all_sprites:\r\n            if isinstance(sprite, Zombies):\r\n                sprite.draw_health()\r\n            self.screen.blit(sprite.image, self.camera.apply(sprite))\r\n        draw_player_health(self.screen, 10, 10, self.player.health / player_health)\r\n        pygame.display.flip()\r\n\r\n    def show_start_screen(self):\r\n        pass\r\n\r\n    def show_gameover_screen(self):\r\n        pass\r\n\r\n    def shoot(self):\r\n        if self.shoot_cooldown == 0 and self.ammo > 0:\r\n            self.shoot_cooldown = 20\r\n            arrow = Arrow(self.rect.centerx + (0.75 * self.rect.size[0] * self.direction), self.rect.centery,\r\n                            self.direction)\r\n            arrow_group.add(arrow)\r\n\r\nclass Arrow(pygame.sprite.Sprite):\r\n\tdef __init__(self, x, y, direction):\r\n\t\tpygame.sprite.Sprite.__init__(self)\r\n\t\tself.speed = 10\r\n\t\tself.image = arrow.png\r\n\t\tself.rect = self.image.get_rect()\r\n\t\tself.rect.center = (x, y)\r\n\t\tself.direction = direction\r\n\r\n\tdef update(self):\r\n\t\t#move arrow\r\n\t\tself.rect.x += (self.direction * self.speed) + screen_scroll\r\n\t\t#check if arrow has gone off screen\r\n\t\tif self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:\r\n\t\t\tself.kill()\r\n\t\t#check for collision with level\r\n\t\tfor tile in world.obstacle_list:\r\n\t\t\tif tile[1].colliderect(self.rect):\r\n\t\t\t\tself.kill()\r\n\r\n\t\t#check collision with characters\r\n\t\tif pygame.sprite.spritecollide(player, arrow_group, False):\r\n\t\t\tif player.alive:\r\n\t\t\t\tplayer.health -= 5\r\n\t\t\t\tself.kill()\r\n\t\tfor enemy in enemy_group:\r\n\t\t\tif pygame.sprite.spritecollide(enemy, arrow_group, False):\r\n\t\t\t\tif enemy.alive:\r\n\t\t\t\t\tenemy.health -= 25\r\n\t\t\t\t\tself.kill()\r\n\r\n\r\ngame = Game()\r\ngame.show_start_screen()\r\nwhile game.Active:\r\n    game.new()\r\n    game.show_gameover_screen()\r\n\r\npygame.quit()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/final project.py b/final project.py
+--- a/final project.py	
++++ b/final project.py	
+@@ -5,28 +5,13 @@
+ import csv
+ 
+ #This imports everything from the settings file and sprites file
++from pygame.cursors import arrow
++
+ from Settings import *
+ from sprites import *
+ from os import path
+ from Camera_maps import *
+ 
+-def draw_player_health(surf, x, y, pct):
+-    if pct < 0:
+-        pct = 0
+-    Bar_length = 100
+-    Bar_height = 20
+-    fill = pct * Bar_length
+-    outline_rect = pygame.Rect(x, y, Bar_length, Bar_height)
+-    fill_rect = pygame.Rect(x, y, fill, Bar_height)
+-    if pct > 100:
+-        col = Green
+-    elif pct > 60:
+-        col = Yellow
+-    else:
+-        col = Red
+-    pygame.draw.rect(surf, col, fill_rect)
+-    pygame.draw.rect(surf, White, outline_rect, 2)
+-
+ 
+ class Game:
+     def __init__(self) -> object:
+@@ -43,12 +28,12 @@
+         game_folder = path.dirname(__file__)
+         maps_folder = path.join(game_folder, 'maps')
+         img_folder = path.join(game_folder, 'img')
+-        player_folder = path.join(img_folder, 'individual chracter sprites')
++        player_folder = path.join(img_folder, 'individual character sprites')
+         zombie_folder = path.join(img_folder,'individual enemy sprites')
+         self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
+         self.map_img = self.map1.Make_map()
+         self.map_rect = self.map_img.get_rect()
+-        self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
++
+         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
+ 
+ 
+@@ -79,7 +64,7 @@
+                 exit_new= Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                 self.exit.add(exit_new)
+             if tile_object.name == "wall":
+-                wall_new = Wall(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
++                wall_new = (tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                 self.Walls.add(wall_new)
+ 
+         self.camera = camera(Width, Height)
+@@ -115,10 +100,7 @@
+                 i.pos.y = hits_zombie[0].rect.top
+                 i.vel.y = 0
+ 
+-        hits = pygame.sprite.groupcollide(self.Zombies, self.Sword, False, True)
+-        for hit in hits:
+-            hit.health -= Sword_damage
+-            hit.vel = vec(0, 0)
++
+ 
+ 
+ 
+@@ -146,17 +128,12 @@
+     def draw(self):
+         #remouve this later
+         pygame.display.set_caption("{:.2}".format(self.clock.get_fps()))
+-
+-
+         self.screen.fill(Black)
+         self.draw_grid()
+         self.screen.blit(self.map_img, self.camera.applyRect(self.map_rect))
+-        for sprite in self.all_sprites:
+-            if isinstance(sprite, Zombies):
+-                sprite.draw_health()
+-            self.screen.blit(sprite.image, self.camera.apply(sprite))
+-        draw_player_health(self.screen, 10, 10, self.player.health / player_health)
+-        pygame.display.flip()
++
++
++
+ 
+     def show_start_screen(self):
+         pass
+@@ -172,35 +149,35 @@
+             arrow_group.add(arrow)
+ 
+ class Arrow(pygame.sprite.Sprite):
+-	def __init__(self, x, y, direction):
+-		pygame.sprite.Sprite.__init__(self)
+-		self.speed = 10
+-		self.image = arrow.png
+-		self.rect = self.image.get_rect()
+-		self.rect.center = (x, y)
+-		self.direction = direction
++    def __init__(self, x, y, direction):
++        pygame.sprite.Sprite.__init__(self)
++        self.speed = 10
++        self.image = arrow.png
++        self.rect = self.image.get_rect()
++        self.rect.center = (x, y)
++        self.direction = direction
+ 
+-	def update(self):
+-		#move arrow
+-		self.rect.x += (self.direction * self.speed) + screen_scroll
+-		#check if arrow has gone off screen
+-		if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
+-			self.kill()
+-		#check for collision with level
+-		for tile in world.obstacle_list:
+-			if tile[1].colliderect(self.rect):
+-				self.kill()
++    def update(self):
++        #move arrow
++        self.rect.x += (self.direction * self.speed) + screen_scroll
++        #check if arrow has gone off screen
++        if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
++            self.kill()
++        #check for collision with level
++        for tile in world.obstacle_list:
++            if tile[1].colliderect(self.rect):
++                self.kill()
+ 
+-		#check collision with characters
+-		if pygame.sprite.spritecollide(player, arrow_group, False):
+-			if player.alive:
+-				player.health -= 5
+-				self.kill()
+-		for enemy in enemy_group:
+-			if pygame.sprite.spritecollide(enemy, arrow_group, False):
+-				if enemy.alive:
+-					enemy.health -= 25
+-					self.kill()
++        #check collision with characters
++        if pygame.sprite.spritecollide(player, arrow_group, False):
++            if player.alive:
++                player.health -= 5
++                self.kill()
++        for enemy in enemy_group:
++            if pygame.sprite.spritecollide(enemy, arrow_group, False):
++                if enemy.alive:
++                    enemy.health -= 25
++                    self.kill()
+ 
+ 
+ game = Game()
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b1eb774a-0d8d-4d57-a28b-0e60867e7572\" name=\"Default Changelist\" comment=\"tried to do collision and zombie movement but failed, I got the exit thoug\">\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/arrow.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/character_idle1.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/character_idle_1.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/character_shoot_left.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/character_shoot_right.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/characteridle2.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_left1.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_left2.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_left3.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_right1.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_right2.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/img/new character/soldier_right3.png\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Settings.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Settings.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/final project.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/final project.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/sprites.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/sprites.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_AUTO_UPDATE\" value=\"true\" />\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/Camera_maps.py\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/final project.py\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"IdeDocumentHistory\">\r\n    <option name=\"CHANGED_PATHS\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/sans.py\" />\r\n        <option value=\"$PROJECT_DIR$/final project.py\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\r\n    <option name=\"x\" value=\"10\" />\r\n    <option name=\"y\" value=\"20\" />\r\n    <option name=\"width\" value=\"1346\" />\r\n    <option name=\"height\" value=\"688\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1s3HsluODBUyzRA1SyLRc4HcHOd\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectView\">\r\n    <navigator proportions=\"\" version=\"1\">\r\n      <foldersAlwaysOnTop value=\"true\" />\r\n    </navigator>\r\n    <panes>\r\n      <pane id=\"Scope\" />\r\n      <pane id=\"ProjectPane\">\r\n        <subPane>\r\n          <expand>\r\n            <path>\r\n              <item name=\"cpt\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"cpt\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n          </expand>\r\n          <select />\r\n        </subPane>\r\n      </pane>\r\n    </panes>\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/final project.py\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"final project\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"cpt\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/final project.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.final project\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b1eb774a-0d8d-4d57-a28b-0e60867e7572\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1620090765500</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1620090765500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"hellooooo\">\r\n      <created>1620090949116</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620090949117</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"is this working\">\r\n      <created>1620094771306</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620094771306</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"imported pygame\">\r\n      <created>1620095352930</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620095352930</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"imported pygame, created the window and fps variables, initiated pygame, pygame mixer, created the window size and started on the game loop.\">\r\n      <created>1620096833726</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620096833726</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"created skeleton of game loop and created colour variables\">\r\n      <created>1620149557719</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620149557719</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"organized the game code and made a file called settings which hold main variables like window size and fps\">\r\n      <created>1620267039368</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620267039368</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"created sprites file\">\r\n      <created>1620321135390</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620321135390</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"finished player movement and sprinting\">\r\n      <created>1620347181570</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620347181570</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"finished window movement\">\r\n      <created>1620666338703</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620666338703</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"did the intro for the tile game\">\r\n      <created>1620669658487</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620669658487</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"did the intro for the tile game\">\r\n      <created>1620669932743</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620669932743</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"got the sprites and made the zombie class but it has no collision\">\r\n      <created>1620871140979</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620871140979</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"got the sprites and made the zombie class but it has no collision\">\r\n      <created>1620871575657</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620871575657</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"sprites\">\r\n      <created>1620871776765</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620871776765</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"sprites\">\r\n      <created>1620871865403</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620871865403</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"sprites\">\r\n      <created>1620926878835</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620926878835</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"new camera system, new collision system, imported map with platforms\">\r\n      <created>1620955557910</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620955557910</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"new camera system, new collision system, imported map with platforms\">\r\n      <created>1620955594503</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620955594503</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"new sprites and mob spawn\">\r\n      <created>1621012105895</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1621012105895</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"tried to do collision and zombie movement but failed, I got the exit thoug\">\r\n      <created>1621192931430</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1621192931430</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"tried to do collision and zombie movement but failed, I got the exit thoug\">\r\n      <created>1621222930633</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1621222930633</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"added player and zombie heatlh\">\r\n      <created>1621266030563</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1621266030563</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"23\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"ToolWindowManager\">\r\n    <frame x=\"-8\" y=\"-8\" width=\"1382\" height=\"744\" extended-state=\"6\" />\r\n    <editor active=\"true\" />\r\n    <layout>\r\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"0\" visible=\"true\" weight=\"0.24330357\" />\r\n      <window_info id=\"Structure\" order=\"1\" side_tool=\"true\" weight=\"0.25\" />\r\n      <window_info id=\"Favorites\" order=\"2\" side_tool=\"true\" />\r\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"0\" />\r\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"1\" />\r\n      <window_info anchor=\"bottom\" id=\"Run\" order=\"2\" weight=\"0.32972974\" />\r\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"3\" weight=\"0.4\" />\r\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"4\" weight=\"0.25\" />\r\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"5\" weight=\"0.4\" />\r\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"6\" />\r\n      <window_info anchor=\"bottom\" id=\"Version Control\" order=\"7\" weight=\"0.3289689\" />\r\n      <window_info anchor=\"bottom\" id=\"Terminal\" order=\"8\" weight=\"0.3289689\" />\r\n      <window_info anchor=\"bottom\" id=\"Event Log\" order=\"9\" side_tool=\"true\" weight=\"0.3289689\" />\r\n      <window_info anchor=\"bottom\" id=\"Python Console\" order=\"10\" />\r\n      <window_info anchor=\"right\" id=\"Commander\" internal_type=\"SLIDING\" order=\"0\" type=\"SLIDING\" weight=\"0.4\" />\r\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"1\" weight=\"0.25\" />\r\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"2\" weight=\"0.25\" />\r\n    </layout>\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"hellooooo\" />\r\n    <MESSAGE value=\"is this working\" />\r\n    <MESSAGE value=\"imported pygame\" />\r\n    <MESSAGE value=\"imported pygame, created the window and fps variables, initiated pygame, pygame mixer, created the window size and started on the game loop.\" />\r\n    <MESSAGE value=\"created skeleton of game loop and created colour variables\" />\r\n    <MESSAGE value=\"organized the game code and made a file called settings which hold main variables like window size and fps\" />\r\n    <MESSAGE value=\"created sprites file\" />\r\n    <MESSAGE value=\"finished player movement and sprinting\" />\r\n    <MESSAGE value=\"finished window movement\" />\r\n    <MESSAGE value=\"did the intro for the tile game\" />\r\n    <MESSAGE value=\"got the sprites and made the zombie class but it has no collision\" />\r\n    <MESSAGE value=\"sprites\" />\r\n    <MESSAGE value=\"new camera system, new collision system, imported map with platforms\" />\r\n    <MESSAGE value=\"new sprites and mob spawn\" />\r\n    <MESSAGE value=\"tried to do collision and zombie movement but failed, I got the exit thoug\" />\r\n    <MESSAGE value=\"added player and zombie heatlh\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"added player and zombie heatlh\" />\r\n  </component>\r\n  <component name=\"editorHistoryManager\">\r\n    <entry file=\"file://$PROJECT_DIR$/sans.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state>\r\n          <caret column=\"9\" selection-start-column=\"9\" selection-end-column=\"9\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/final project.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\r\n    </entry>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,23 +1,19 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="tried to do collision and zombie movement but failed, I got the exit thoug">
+-      <change afterPath="$PROJECT_DIR$/img/new character/arrow.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/character_idle1.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/character_idle_1.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/character_shoot_left.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/character_shoot_right.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/characteridle2.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_left1.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_left2.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_left3.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_right1.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_right2.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/img/new character/soldier_right3.png" afterDir="false" />
++    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="working code">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-13_1_47_p_m___Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_10_03_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_10_03_AM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_13_2021_1_29_PM__Default_Changelist_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_10_04_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_10_04_AM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_1_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_14_2021_1_10_PM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
