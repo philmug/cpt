@@ -16,7 +16,7 @@ Tilesize= 32
 player_health = 100
 player_acc = 0.5
 player_fric = -0.12
-player_image= "L1.png" #wil be something like "main_hero.png"
+player_image= "L1.png" #widl be something like "main_hero.png"
 player_grav = 0.9
 player_vel = 1
 
