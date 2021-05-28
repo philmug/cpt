@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="working code">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2021_10_01_AM_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2021_10_01_AM__Default_Changelist_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2021_10_12_AM_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2021_10_12_AM__Default_Changelist_1.xml" beforeDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="got both collision and zombie movement working and added coins">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map2.tmx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +42,10 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/sprites.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/final project.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Settings.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -57,7 +62,7 @@
     <option name="height" value="688" />
   </component>
   <component name="ProjectId" id="1s3HsluODBUyzRA1SyLRc4HcHOd" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -291,49 +296,28 @@
       <option name="project" value="LOCAL" />
       <updated>1621433034297</updated>
     </task>
-    <task id="LOCAL-00024" summary="working code">
-      <created>1621440302343</created>
+    <task id="LOCAL-00024" summary="got both collision and zombie movement working">
+      <created>1621802265689</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1621440302343</updated>
+      <updated>1621802265689</updated>
     </task>
-    <task id="LOCAL-00025" summary="working code">
-      <created>1621440901066</created>
+    <task id="LOCAL-00025" summary="got both collision and zombie movement working">
+      <created>1621802312654</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1621440901066</updated>
+      <updated>1621802312654</updated>
     </task>
-    <task id="LOCAL-00026" summary="working code">
-      <created>1621960665451</created>
+    <task id="LOCAL-00026" summary="got both collision and zombie movement working and added coins">
+      <created>1621804734735</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1621960665451</updated>
+      <updated>1621804734735</updated>
     </task>
-    <task id="LOCAL-00027" summary="working code">
-      <created>1621962200061</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1621962200061</updated>
-    </task>
-    <task id="LOCAL-00028" summary="working code">
-      <created>1621962223257</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1621962223257</updated>
-    </task>
-    <task id="LOCAL-00029" summary="working code">
-      <created>1621962344384</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1621962344384</updated>
-    </task>
-    <option name="localTasksCounter" value="30" />
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -390,8 +374,9 @@
     <MESSAGE value="tried to do collision and zombie movement but failed, I got the exit thoug" />
     <MESSAGE value="added player and zombie heatlh" />
     <MESSAGE value="added new sprites, added arrow class as well as what happens when it collides with the map, an enemy, goes off screen, etc." />
-    <MESSAGE value="working code" />
-    <option name="LAST_COMMIT_MESSAGE" value="working code" />
+    <MESSAGE value="got both collision and zombie movement working" />
+    <MESSAGE value="got both collision and zombie movement working and added coins" />
+    <option name="LAST_COMMIT_MESSAGE" value="got both collision and zombie movement working and added coins" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
