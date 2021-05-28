@@ -152,14 +152,12 @@
   <object id="99" name="zombie_bar" x="2656" y="544" width="32" height="32"/>
   <object id="115" x="320" y="896"/>
   <object id="118" name="platform" x="128" y="96" width="32" height="352"/>
-  <object id="124" x="2688" y="704"/>
   <object id="125" name="platform" x="576" y="416" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="spawns">
   <object id="36" name="player_spawn" x="224" y="352" width="32" height="32"/>
   <object id="71" name="zombie_spawn" x="1472" y="544" width="32" height="32"/>
   <object id="72" name="zombie_spawn" x="2048" y="512" width="32" height="32"/>
-  <object id="73" name="zombie_spawn" x="2528" y="512" width="32" height="32"/>
   <object id="74" name="zombie_spawn" x="2336" y="576" width="32" height="32"/>
   <object id="116" name="exit" x="2624" y="544" width="32" height="32"/>
  </objectgroup>

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="got both collision and zombie movement working and added coins">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-17_8_23_a_m___Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_24_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_16_2021_6_56_PM__Default_Changelist_1.xml" beforeDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="new map">
+      <change afterPath="$PROJECT_DIR$/maps/Map 3.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/Map2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map2.tmx" afterDir="false" />
@@ -317,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621804734735</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="new map">
+      <created>1622136715224</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1622136715224</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -376,7 +378,8 @@
     <MESSAGE value="added new sprites, added arrow class as well as what happens when it collides with the map, an enemy, goes off screen, etc." />
     <MESSAGE value="got both collision and zombie movement working" />
     <MESSAGE value="got both collision and zombie movement working and added coins" />
-    <option name="LAST_COMMIT_MESSAGE" value="got both collision and zombie movement working and added coins" />
+    <MESSAGE value="new map" />
+    <option name="LAST_COMMIT_MESSAGE" value="new map" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
