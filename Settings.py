@@ -61,8 +61,8 @@ map1_length = 90 * Tilesize
 pygame.init()
 
 #adds music and volume
-sound = pygame.mixer.Sound('lvl1.wav')
-sound.play()
+#sound = pygame.mixer.Sound('lvl1.wav')
+# sound.play()
 
 
 
