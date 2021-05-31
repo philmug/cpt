@@ -449,7 +449,7 @@
   <object id="137" name="zombie_bar" x="1440" y="2208" width="32" height="32"/>
   <object id="138" name="zombie_spawn" x="1344" y="2176" width="32" height="32"/>
   <object id="139" name="exit" x="2976" y="2400" width="32" height="64"/>
-  <object id="140" name="player_spawn" x="64" y="416" width="32" height="64"/>
+  <object id="140" name="player_spawn" x="64" y="416" width="32" height="32"/>
   <object id="141" name="coin_spawn" x="320" y="448" width="32" height="32"/>
   <object id="142" name="coin_spawn" x="832" y="384" width="32" height="32"/>
   <object id="143" name="coin_spawn" x="1280" y="384" width="32" height="32"/>
