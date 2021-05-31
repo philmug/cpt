@@ -11,7 +11,7 @@ from os import path
 from Camera_maps import *
 from os import path
 
-
+# player health
 def draw_player_health(surf, x, y, pct):
     if pct < 0:
         pct = 0
