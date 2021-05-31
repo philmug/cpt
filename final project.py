@@ -9,6 +9,8 @@ from Settings import *
 from sprites import *
 from os import path
 from Camera_maps import *
+from os import path
+
 
 def draw_player_health(surf, x, y, pct):
     if pct < 0:
@@ -35,9 +37,24 @@ class Game:
         pygame.mixer.init()
         self.screen= pygame.display.set_mode((Width, Height))
         pygame.display.set_caption(Title)
-        self.clock= pygame.time.Clock()
+        self.clock = pygame.time.Clock()
         self.Active = True
         self.load_data()
+        self.load_data()
+
+    def load_data(self):
+        # load high score
+        self.dir = path.dirname(__file__)
+        with open(path.join(self.dir, Hs_File), 'w') as f:
+            try:
+                self.highscore = int(f.read())
+            except:
+                self.highscore = 0
+
+
+
+
+
 
     def load_data(self):
         game_folder = path.dirname(__file__)

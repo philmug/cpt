@@ -8,6 +8,7 @@ Width= 1000 #tbd
 Height= 600 #tbd
 FPS= 60 #tbd
 Title= "Until Death"
+Hs_File = "highscore"
 
 #this determines the tile size
 Tilesize= 32
