@@ -32,7 +32,7 @@ def draw_player_health(surf, x, y, pct):
 
 class Game:
     def __init__(self) -> object:
-        #This is initiating pygame and the pygame mixer and it creates the window size.
+        #This is initiating pygame and the pygame mixer and it creates the window size
         pygame.init()
         pygame.mixer.init()
         self.screen= pygame.display.set_mode((Width, Height))
