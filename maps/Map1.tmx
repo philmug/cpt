@@ -159,7 +159,7 @@
   <object id="71" name="zombie_spawn" x="1472" y="544" width="32" height="32"/>
   <object id="72" name="zombie_spawn" x="2048" y="512" width="32" height="32"/>
   <object id="74" name="zombie_spawn" x="2336" y="576" width="32" height="32"/>
-  <object id="116" name="exit" x="2624" y="544" width="32" height="32"/>
+  <object id="116" name="exit" x="2624" y="512" width="32" height="64"/>
  </objectgroup>
  <objectgroup id="7" name="spikes/coins">
   <object id="61" name="spike" x="992" y="640" width="64" height="32"/>

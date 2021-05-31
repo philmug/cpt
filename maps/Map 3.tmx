@@ -321,7 +321,7 @@
   <object id="85" name="spike" x="2208" y="928" width="96" height="32"/>
   <object id="86" name="spike" x="1856" y="1952" width="544" height="32"/>
   <object id="87" name="spike" x="1216" y="1952" width="96" height="32"/>
-  <object id="88" name="play_spawn" x="64" y="416" width="32" height="32"/>
+  <object id="88" name="player_spawn" x="64" y="416" width="32" height="32"/>
   <object id="89" name="exit" x="64" y="1888" width="32" height="64"/>
   <object id="90" name="zombie_bar" x="192" y="448" width="32" height="32"/>
   <object id="91" name="zombe_bar" x="352" y="448" width="32" height="32"/>
