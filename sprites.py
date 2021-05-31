@@ -63,7 +63,7 @@ class Player(pygame.sprite.Sprite):
             self.ground = False
 
         self.acc = vec(0, player_grav)
-        Key= pygame.key.get_pressed()
+        Key = pygame.key.get_pressed()
         self.rect.y += 1
         hits = pygame.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.y -= 1
@@ -109,6 +109,17 @@ class Player(pygame.sprite.Sprite):
             self.health -= Spike_damage
             if self.health <= 0:
                 self.game.playing = False
+
+        hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
+        if hit_final_exit:
+            pass
+        
+        hit_exit = pygame.sprite.spritecollide(self, self.game.exit, False)
+        if hit_exit:
+            self.game.level += 1
+            self.game.load_map()
+            self.game.playing = False
+
 # score ribbon
         coin_hits = pygame.sprite.spritecollide(self, self.game.coin, True)
         if coin_hits:

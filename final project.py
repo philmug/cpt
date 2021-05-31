@@ -30,6 +30,7 @@ def draw_player_health(surf, x, y, pct):
     pygame.draw.rect(surf, White, outline_rect, 2)
 
 
+
 class Game:
     def __init__(self) -> object:
         #This is initiating pygame and the pygame mixer and it creates the window size
@@ -41,6 +42,7 @@ class Game:
         self.Active = True
         self.load_data()
         self.load_data()
+        self.level = 1
 
     def load_data(self):
         # load high score
@@ -64,14 +66,113 @@ class Game:
         player_folder = path.join(img_folder, 'Hero')
         zombie_folder = path.join(img_folder,'individual enemy sprites')
         items_folder = path.join(sprites_folder, 'extra items')
-        self.map1= maps(path.join(maps_folder, 'Map1.tmx'))
-        self.map_img = self.map1.Make_map()
-        self.map_rect = self.map_img.get_rect()
+
+        self.map1 = maps(path.join(maps_folder, 'Map1.tmx'))
+        self.map1_img = self.map1.Make_map()
+        self.map1_rect = self.map1_img.get_rect()
+
+        self.map2 = maps(path.join(maps_folder, 'Map2.tmx'))
+        self.map2_img = self.map2.Make_map()
+        self.map2_rect = self.map2_img.get_rect()
+
+        self.map3 = maps(path.join(maps_folder, 'Map 3.tmx'))
+        self.map3_img = self.map3.Make_map()
+        self.map3_rect = self.map3_img.get_rect()
+
+        self.map4 = maps(path.join(maps_folder, 'Map4.tmx'))
+        self.map4_img = self.map4.Make_map()
+        self.map4_rect = self.map4_img.get_rect()
+
         self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
         self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
         self.bullet_img = pygame.image.load(path.join(items_folder, 'arrow_silver.png')).convert_alpha()
 
+
+    def load_map(self):
+        if self.level == 1:
+            for tile_object in self.map1.tmxdata.objects:
+                if tile_object.name == "platform":
+                    plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.platforms.add(plat_new)
+                if tile_object.name == "player_spawn":
+                    self.player.pos = ((tile_object.x, tile_object.y))
+                if tile_object.name == "zombie_spawn":
+                    self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "zombie_bar":
+                    bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Zombie_bar.add(bar_new)
+                if tile_object.name == "exit":
+                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.exit.add(exit_new)
+                if tile_object.name == "coin_spawn":
+                    self.coin.add(Coin(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "spike":
+                    Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Spikes.add(Spikes_new)
+
+        if self.level == 2:
+            for tile_object in self.map2.tmxdata.objects:
+                if tile_object.name == "platform":
+                    plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.platforms.add(plat_new)
+                if tile_object.name == "player_spawn":
+                    self.player.pos = ((tile_object.x, tile_object.y))
+                if tile_object.name == "zombie_spawn":
+                    self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "zombie_bar":
+                    bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Zombie_bar.add(bar_new)
+                if tile_object.name == "exit":
+                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.exit.add(exit_new)
+                if tile_object.name == "coin_spawn":
+                    self.coin.add(Coin(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "spike":
+                    Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Spikes.add(Spikes_new)
+
+        if self.level == 3:
+            for tile_object in self.map3.tmxdata.objects:
+                if tile_object.name == "platform":
+                    plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.platforms.add(plat_new)
+                if tile_object.name == "player_spawn":
+                    self.player.pos = ((tile_object.x, tile_object.y))
+                if tile_object.name == "zombie_spawn":
+                    self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "zombie_bar":
+                    bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Zombie_bar.add(bar_new)
+                if tile_object.name == "exit":
+                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.exit.add(exit_new)
+                if tile_object.name == "coin_spawn":
+                    self.coin.add(Coin(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "spike":
+                    Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Spikes.add(Spikes_new)
+
+        if self.level == 4:
+            for tile_object in self.map4.tmxdata.objects:
+                if tile_object.name == "platform":
+                    plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.platforms.add(plat_new)
+                if tile_object.name == "player_spawn":
+                    self.player.pos = ((tile_object.x, tile_object.y))
+                if tile_object.name == "zombie_spawn":
+                    self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "zombie_bar":
+                    bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Zombie_bar.add(bar_new)
+                if tile_object.name == "exit_final":
+                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.exit_final.add(exit_new)
+                if tile_object.name == "coin_spawn":
+                    self.coin.add(Coin(self, tile_object.x, tile_object.y ))
+                if tile_object.name == "spike":
+                    Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.Spikes.add(Spikes_new)
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
@@ -80,36 +181,14 @@ class Game:
         self.Zombie_bar = pygame.sprite.Group()
         self.Zombies = pygame.sprite.Group()
         self.exit = pygame.sprite.Group()
+        self.exit_final = pygame.sprite.Group()
         self.coin = pygame.sprite.Group()
         self.Spikes = pygame.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        self.Plat_rect = []
-        for tile_object in self.map1.tmxdata.objects:
-            if tile_object.name == "platform":
-                plat_new = Platform(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.platforms.add(plat_new)
-                self.Plat_rect.append(pygame.Rect(tile_object.x, tile_object.y, tile_object.width, tile_object.height))
-            if tile_object.name == "player_spawn":
-                self.player.pos = ((tile_object.x, tile_object.y))
-            if tile_object.name == "zombie_spawn":
-                self.Zombies.add(Zombie(self, tile_object.x, tile_object.y ))
-            if tile_object.name == "zombie_bar":
-                bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.Zombie_bar.add(bar_new)
-            if tile_object.name == "exit":
-                exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.exit.add(exit_new)
-            if tile_object.name == "coin_spawn":
-                self.coin.add(Coin(self, tile_object.x, tile_object.y ))
-            if tile_object.name == "spike":
-                Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                self.Spikes.add(Spikes_new)
-
         self.camera = camera(Width, Height)
+        self.load_map()
         self.run()
-        return self.Plat_rect
-
 
 
     def run(self):
@@ -153,23 +232,26 @@ class Game:
                 self.Active= False
             hit_exit = pygame.sprite.spritecollide(self.player, self.exit, False)
             if hit_exit:
-                pygame.quit()
-
-    def draw_grid(self):
-        for x in range(0, Width, Tilesize):
-            pygame.draw.line(self.screen, Lightgrey, (x,0), (x,Height))
-        for y in range(0, Height, Tilesize):
-            pygame.draw.line(self.screen, Lightgrey, (0, y), (Width,y))
+                self.level += 1
+                self.all_sprites.empty()
+                self.load_map()
 
 
     def draw(self):
         #remouve this later
-        pygame.display.set_caption("{:.2}".format(self.clock.get_fps()))
+        #pygame.display.set_caption("{:.2}".format(self.clock.get_fps()))
 
 
         self.screen.fill(Black)
-        self.draw_grid()
-        self.screen.blit(self.map_img, self.camera.applyRect(self.map_rect))
+        if self.level == 1:
+            self.screen.blit(self.map1_img, self.camera.applyRect(self.map1_rect))
+        if self.level == 2:
+            self.screen.blit(self.map2_img, self.camera.applyRect(self.map2_rect))
+        if self.level == 3:
+            self.screen.blit(self.map3_img, self.camera.applyRect(self.map3_rect))
+        if self.level == 4:
+            self.screen.blit(self.map4_img, self.camera.applyRect(self.map4_rect))
+
         for sprite in self.all_sprites:
             if isinstance(sprite, Zombie):
                 sprite.draw_health()

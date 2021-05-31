@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="112" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="159">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="112" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="163">
  <tileset firstgid="1" source="Tileset1.tsx"/>
  <tileset firstgid="337" source="dirt2.tsx"/>
  <layer id="1" name="background" width="112" height="100">
@@ -412,6 +412,9 @@
   <object id="102" name="platform" x="3008" y="1824" width="32" height="640"/>
   <object id="103" name="platform" x="480" y="1696" width="32" height="128"/>
   <object id="104" name="platform" x="512" y="1792" width="2496" height="32"/>
+  <object id="159" name="platform" x="3008" y="2240" width="32" height="224"/>
+  <object id="161" name="platform" x="0" y="1440" width="32" height="576"/>
+  <object id="162" name="platform" x="0" y="2016" width="32" height="224"/>
  </objectgroup>
  <objectgroup id="5" name="spike/ spawn">
   <object id="105" name="spike" x="544" y="736" width="576" height="32"/>
@@ -431,7 +434,7 @@
   <object id="119" name="zombie_bar" x="2464" y="544" width="32" height="32"/>
   <object id="120" name="zombie_bar" x="2656" y="544" width="32" height="32"/>
   <object id="121" name="zombie_spawn" x="2592" y="512" width="32" height="32"/>
-  <object id="122" name="zombie_spawn" x="2080" y="1408" width="32" height="32"/>
+  <object id="122" name="zombie_bar" x="2080" y="1408" width="32" height="32"/>
   <object id="123" name="zombie_bar" x="2272" y="1408" width="32" height="32"/>
   <object id="124" name="zombie_bar" x="2496" y="1408" width="32" height="32"/>
   <object id="125" name="zombie_spawn" x="2400" y="1376" width="32" height="32"/>
@@ -448,7 +451,7 @@
   <object id="136" name="zombie_bar" x="1216" y="2208" width="32" height="32"/>
   <object id="137" name="zombie_bar" x="1440" y="2208" width="32" height="32"/>
   <object id="138" name="zombie_spawn" x="1344" y="2176" width="32" height="32"/>
-  <object id="139" name="exit" x="2976" y="2400" width="32" height="64"/>
+  <object id="139" name="exit_final" x="2976" y="2400" width="32" height="64"/>
   <object id="140" name="player_spawn" x="64" y="416" width="32" height="32"/>
   <object id="141" name="coin_spawn" x="320" y="448" width="32" height="32"/>
   <object id="142" name="coin_spawn" x="832" y="384" width="32" height="32"/>
