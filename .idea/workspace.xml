@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="map updates">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2021_7_52_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2021_7_52_PM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="created the interlevel system">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2021_10_40_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2021_10_40_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/Map 3.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map 3.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/Map2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map2.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/Map4.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map4.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -336,7 +337,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622396307428</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="created the interlevel system">
+      <created>1622485917248</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1622485917248</updated>
+    </task>
+    <task id="LOCAL-00031" summary="created the interlevel system">
+      <created>1622485932739</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1622485932739</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -398,7 +413,8 @@
     <MESSAGE value="new map" />
     <MESSAGE value="3rd map done" />
     <MESSAGE value="4th map done" />
-    <option name="LAST_COMMIT_MESSAGE" value="4th map done" />
+    <MESSAGE value="created the interlevel system" />
+    <option name="LAST_COMMIT_MESSAGE" value="created the interlevel system" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">

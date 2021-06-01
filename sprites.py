@@ -27,13 +27,15 @@ class Player(pygame.sprite.Sprite):
         for wall in platforms:
             if pygame.sprite.collide_rect(self, wall):
                 if self.acc.x > 0:
+                    self.acc.x = 0
+                    self.vel.x = 0
                     self.rect.right = wall.rect.left
-                    self.acc.x = 0
-                    self.vel.x = 0
+
                 if self.acc.x < 0:
-                    self.rect.left = wall.rect.right
                     self.acc.x = 0
                     self.vel.x = 0
+                    self.rect.left = wall.rect.right
+
 
 
     def jump(self):
