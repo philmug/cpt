@@ -22,6 +22,9 @@ class Player(pygame.sprite.Sprite):
         self.idling_counter = 0
         self.animation_list = []
         self.score = 0
+        self.fade_complete = True
+        self.death_fade_complete = True
+        self.fade_counter = 0
 
     def wallCollisions(self, platforms):
         for wall in platforms:
@@ -35,6 +38,31 @@ class Player(pygame.sprite.Sprite):
                     self.acc.x = 0
                     self.vel.x = 0
                     self.rect.left = wall.rect.right
+
+
+    def fade_Black(self):
+
+        if self.fade_complete == False:
+            self.fade_counter += 4
+            if self.fade_counter <= Width:
+                pygame.draw.rect(screen, Black, (0 - self.fade_counter, 0, Width // 2, Height))
+                pygame.draw.rect(screen, Black, (Width // 2 + self.fade_counter, 0, Width, Height))
+                pygame.draw.rect(screen, Black, (0, 0 - self.fade_counter, Width, Height // 2))
+                pygame.draw.rect(screen, Black, (0, Height // 2 +self.fade_counter, Width, Height))
+            if self.fade_counter >= Width:
+                self.fade_complete = True
+                self.game.playing = False
+
+
+    def death_Fade(self):
+
+        if self.death_fade_complete == False:
+            self.fade_counter += 4
+            if self.fade_counter <= Width:
+                pygame.draw.rect(screen, Red, (0, 0, Width, 0 + self.fade_counter))
+            if self.fade_counter >= Width:
+                self.death_fade_complete = True
+                self.game.playing = False
 
 
 
@@ -96,8 +124,8 @@ class Player(pygame.sprite.Sprite):
         for hit in hits:
             self.health -= Zombie_damage
             hit.vel = vec(0, 0)
-            if self.health <= 0:
-                self.game.playing = False
+            if self.health <= 0 and self.death_fade_complete == True:
+                self.death_fade_complete = False
 
 
 
@@ -109,18 +137,23 @@ class Player(pygame.sprite.Sprite):
         Spikes_hits = pygame.sprite.spritecollide(self, self.game.Spikes, False)
         if Spikes_hits:
             self.health -= Spike_damage
-            if self.health <= 0:
-                self.game.playing = False
+            if self.health <= 0 and self.death_fade_complete == True:
+                self.death_fade_complete = False
+
+
 
         hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
         if hit_final_exit:
-            pass
+            self.game.Active = False
         
         hit_exit = pygame.sprite.spritecollide(self, self.game.exit, False)
-        if hit_exit:
+        if hit_exit and self.fade_complete == True:
+            self.fade_counter = 0
             self.game.level += 1
             self.game.load_map()
-            self.game.playing = False
+            self.fade_complete = False
+
+
 
 # score ribbon
         coin_hits = pygame.sprite.spritecollide(self, self.game.coin, True)

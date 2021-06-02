@@ -31,6 +31,8 @@ def draw_player_health(surf, x, y, pct):
 
 
 
+
+
 class Game:
     def __init__(self) -> object:
         #This is initiating pygame and the pygame mixer and it creates the window size
@@ -41,20 +43,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.Active = True
         self.load_data()
-        self.load_data()
         self.level = 1
-
-    def load_data(self):
-        # load high score
-        self.dir = path.dirname(__file__)
-        with open(path.join(self.dir, Hs_File), 'w') as f:
-            try:
-                self.highscore = int(f.read())
-            except:
-                self.highscore = 0
-
-
-
 
 
 
@@ -88,6 +77,12 @@ class Game:
         self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
         self.bullet_img = pygame.image.load(path.join(items_folder, 'arrow_silver.png')).convert_alpha()
 
+        self.dir = path.dirname(__file__)
+        with open(path.join(self.dir, Hs_File), 'w') as f:
+            try:
+                self.highscore = int(f.read())
+            except:
+                self.highscore = 0
 
     def load_map(self):
         if self.level == 1:
@@ -257,6 +252,8 @@ class Game:
                 sprite.draw_health()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         draw_player_health(self.screen, 10, 10, self.player.health / player_health)
+        self.player.fade_Black()
+        self.player.death_Fade()
         pygame.display.flip()
 
     def show_start_screen(self):
