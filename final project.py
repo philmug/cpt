@@ -161,7 +161,7 @@ class Game:
                     bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                     self.Zombie_bar.add(bar_new)
                 if tile_object.name == "exit_final":
-                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    exit_new = Exit_final(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                     self.exit_final.add(exit_new)
                 if tile_object.name == "coin_spawn":
                     self.coin.add(Coin(self, tile_object.x, tile_object.y ))

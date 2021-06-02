@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="added highscore file">
-      <change afterPath="$PROJECT_DIR$/highscore" afterDir="false" />
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="got transitions to work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Camera_maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Camera_maps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map 3.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map 3.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map1.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/Map2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map2.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Map4.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Map4.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -357,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622567690006</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="got transitions to work">
+      <created>1622648469857</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1622648469857</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -421,7 +428,8 @@
     <MESSAGE value="4th map done" />
     <MESSAGE value="created the interlevel system" />
     <MESSAGE value="added highscore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="added highscore file" />
+    <MESSAGE value="got transitions to work" />
+    <option name="LAST_COMMIT_MESSAGE" value="got transitions to work" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">

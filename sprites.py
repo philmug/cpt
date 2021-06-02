@@ -310,6 +310,15 @@ class Spikes(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+class Exit_final(pygame.sprite.Sprite):
+    def __init__(self, x, y, w, h):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((w, h))
+        self.image.fill(Green)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
 
 
 

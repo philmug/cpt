@@ -184,7 +184,7 @@
   <object id="72" name="zombie_spawn" x="2752" y="608" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="spawns and barriers">
-  <object id="47" name="player_spawn" x="192" y="384" width="32" height="32"/>
+  <object id="47" name="player_spawn" x="192" y="416" width="32" height="32"/>
   <object id="48" name="exit" x="3008" y="576" width="32" height="64"/>
  </objectgroup>
 </map>
