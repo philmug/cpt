@@ -1,82 +1,69 @@
+#these are importing pygame, pytmx and everything from the settings file
 import pygame
 import pytmx
 from Settings import *
 
-
+#this is the maps class
 class maps:
+    #initiating the map class and getting the data from the map file
     def __init__(self, filename):
         tm = pytmx.load_pygame(filename)
         self.map_width = tm.width * tm.tilewidth
         self.map_height = tm.height * tm.tileheight
         self.tmxdata = tm
 
-
+    #This function renders the map files into images
     def render(self, surface):
+        #this gets the time image information
         ti = self.tmxdata.get_tile_image_by_gid
+        #this for loop goes over every visible layer in the map file
         for layer in self.tmxdata.visible_layers:
+            #This if statement checks if the layer is a tmx tiled tile layer
             if isinstance(layer, pytmx.TiledTileLayer):
+                #this for loop goes over every block on the layer
                 for x, y, gid in layer:
+                    #the tile variable is assaigned the value of the x, y and type of the block
                     tile = ti(gid)
+                    #this if statement is checking if there is a tile and if there is then it blit's it on the surface
                     if tile:
                         surface.blit(tile, (x * self.tmxdata.tilewidth, y * self.tmxdata.tileheight))
-
+    #this function puts the rendered map image on a temporary surface and returns the temporary surface
     def Make_map(self):
             temp_surface = pygame.Surface((self.map_width, self.map_height))
             self.render(temp_surface)
             return temp_surface
 
+#this is the camera class
 class camera:
+    #this initiates the class and the valriables used in the class
     def __init__(self, camera_width, camera_height):
         self.camera = pygame.Rect(0, 0, camera_width, camera_height)
         self.camera_width = camera_width
         self.camera_height = camera_height
 
-
+    #this function checks where the entities need to be on the screen
     def apply(self, entity):
+        # it returns how much the entities need to move by which is the value of how much the camera mouved
         return entity.rect.move(self.camera.topleft)
 
+    #this function moves the camera rect to keep the player in the center of the screen
     def update(self, target):
         camera_x = -target.rect.x + int(Width/2)
         camera_y = -target.rect.y + int(Height/2)
 
+        #thse if statements check if the camera rect if off the level and then repositions it to only show the level
         if camera_x >= 0:
             camera_x = 0
         if camera_y >= 0:
             camera_y = 0
-        # if camera_x <= map1_length - self.camera_width:
-        #     camera_x = map1_length - self.camera_width
-        # if camera_y <= map1_height - self.camera_height:
-        #     camera_y = map1_height - self.camera_height
 
+        #this is updating the camera values
         self.camera = pygame.Rect(camera_x, camera_y, self.camera_width, self.camera_height)
 
-
+    #This moves the camera to the camera rect
     def applyRect(self, rect):
         return rect.move(self.camera.topleft)
 
-screen= pygame.display.set_mode((Width, Height))
 
-class ScreenFade():
-    def __init__(self, direction, colour, speed):
-        self.direction = direction
-        self.colour = colour
-        self.speed = speed
-        self.fade_counter = 0
-
-
-    def fade(self):
-        fade_complete = False
-        self.fade_counter += self.speed
-        if self.direction == 1:#whole screen fade
-            pygame.draw.rect(screen, self.colour, (0 - self.fade_counter, 0, Width // 2, Height))
-            pygame.draw.rect(screen, self.colour, (Width // 2 + self.fade_counter, 0, Width, Height))
-            pygame.draw.rect(screen, self.colour, (0, 0 - self.fade_counter, Width, Height // 2))
-            pygame.draw.rect(screen, self.colour, (0, Height // 2 +self.fade_counter, Width, Height))
-        if self.direction == 2:#vertical screen fade down
-            pygame.draw.rect(screen, self.colour, (0, 0, Width, 0 + self.fade_counter))
-        if self.fade_counter >= Width:
-            fade_complete = True
-
-        return fade_complete
 
 

@@ -25,6 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.fade_complete = True
         self.death_fade_complete = True
         self.fade_counter = 0
+        self.screen = pygame.display.set_mode((Width, Height))
 
     def wallCollisions(self, platforms):
         for wall in platforms:
@@ -45,10 +46,10 @@ class Player(pygame.sprite.Sprite):
         if self.fade_complete == False:
             self.fade_counter += 4
             if self.fade_counter <= Width:
-                pygame.draw.rect(screen, Black, (0 - self.fade_counter, 0, Width // 2, Height))
-                pygame.draw.rect(screen, Black, (Width // 2 + self.fade_counter, 0, Width, Height))
-                pygame.draw.rect(screen, Black, (0, 0 - self.fade_counter, Width, Height // 2))
-                pygame.draw.rect(screen, Black, (0, Height // 2 +self.fade_counter, Width, Height))
+                pygame.draw.rect(self.screen, Black, (0 - self.fade_counter, 0, Width // 2, Height))
+                pygame.draw.rect(self.screen, Black, (Width // 2 + self.fade_counter, 0, Width, Height))
+                pygame.draw.rect(self.screen, Black, (0, 0 - self.fade_counter, Width, Height // 2))
+                pygame.draw.rect(self.screen, Black, (0, Height // 2 +self.fade_counter, Width, Height))
             if self.fade_counter >= Width:
                 self.fade_complete = True
                 self.game.playing = False
@@ -59,7 +60,7 @@ class Player(pygame.sprite.Sprite):
         if self.death_fade_complete == False:
             self.fade_counter += 4
             if self.fade_counter <= Width:
-                pygame.draw.rect(screen, Red, (0, 0, Width, 0 + self.fade_counter))
+                pygame.draw.rect(self.screen, Red, (0, 0, Width, 0 + self.fade_counter))
             if self.fade_counter >= Width:
                 self.death_fade_complete = True
                 self.game.playing = False
