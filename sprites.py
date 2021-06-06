@@ -194,17 +194,20 @@ class Player(pygame.sprite.Sprite):
         hit_exit = pygame.sprite.spritecollide(self, self.game.exit, False)
         if hit_exit and self.fade_complete == True:
             self.fade_counter = 0
+            self.game.highscore += self.score/ (int(self.game.time)/1000)
             self.game.level += 1
-            self.game.load_map()
-            self.fade_complete = False
-
-
+            if self.game.level <= self.game.max_level:
+                self.game.load_map()
+                print(self.game.highscore)
+                self.fade_complete = False
+            else:
+                pass
 
         #this checks if the player hits the coin, if it does it deletes the coin and adds to the score
         coin_hits = pygame.sprite.spritecollide(self, self.game.coin, True)
         if coin_hits:
             self.score += coin_score
-            print(self.score)
+
 
 
 
@@ -268,13 +271,12 @@ class Zombie(pygame.sprite.Sprite):
                 if self.vel.x > 0:
                     self.rect.right = wall.rect.left
                     self.vel.x *= -1
-                    print('hit')
                 #if they are not moving right, then it puts them to the right of the collision
                 # and makes them move in the opposite dirrection
                 elif self.vel.x < 0:
                     self.rect.left = wall.rect.right
                     self.vel.x *= -1
-                    print('hit1')
+
 
     #this is the function that updates the zombie sprites
     def update(self):

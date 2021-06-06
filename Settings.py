@@ -40,7 +40,7 @@ Zombie_damage = 2
 Zombie_knockback = 2
 
 #coin properties
-coin_score = 10
+coin_score = 10000
 
 #Spike properties
 Spike_damage = 10

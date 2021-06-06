@@ -31,7 +31,14 @@ def draw_player_health(surf, x, y, pct):
     pygame.draw.rect(surf, White, outline_rect, 2)
 
 
+score = 0
 
+def draw_score(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, White)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
 
 # this is the game class
 class Game:
@@ -48,6 +55,7 @@ class Game:
         self.Active = True
         self.load_data()
         self.level = 1
+        self.max_level = 4
 
 
     # This function loads all the data need form the extra files we have
@@ -205,9 +213,9 @@ class Game:
                 if tile_object.name == "zombie_bar":
                     bar_new = Zombie_bar(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                     self.Zombie_bar.add(bar_new)
-                if tile_object.name == "exit_final":
-                    exit_new = Exit_final(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-                    self.exit_final.add(exit_new)
+                if tile_object.name == "exit":
+                    exit_new = Exit(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                    self.exit.add(exit_new)
                 if tile_object.name == "coin_spawn":
                     self.coin.add(Coin(self, tile_object.x, tile_object.y ))
                 if tile_object.name == "spike":
@@ -228,6 +236,7 @@ class Game:
         self.player = Player(self)
         self.all_sprites.add(self.player)
         self.camera = camera(Width, Height)
+        self.highscore = 0
         self.load_map()
         self.run()
 
@@ -235,7 +244,9 @@ class Game:
     def run(self):
         #this while loop calls events, update and draw function at the rate of the fps
         self.playing = True
+        self.start_time = pygame.time.get_ticks()
         while self.playing:
+            self.time = pygame.time.get_ticks() - self.start_time
             self.clock.tick(FPS)
             self.events()
             self.update()
@@ -280,7 +291,7 @@ class Game:
                 self.Active= False
 
             #This checks if the player hits the exit and if it does then it adds on to the level variable
-            #emptiesthe all_sprites group and loads the next map
+            #empties the all_sprites group and loads the next map
             hit_exit = pygame.sprite.spritecollide(self.player, self.exit, False)
             if hit_exit:
                 self.level += 1
@@ -288,9 +299,7 @@ class Game:
                 self.load_map()
 
 
-            hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
-            if hit_final_exit:
-                self.game.Active = False
+
 
 
     def draw(self):
@@ -322,6 +331,8 @@ class Game:
         # yet it will still work because they have conditions that need to be meet before playing
         self.player.fade_Black()
         self.player.death_Fade()
+
+        draw_score(self.screen, "level  " + str(self.level)+ "   Score: " +str(self.player.score), 18, Width / 2, 10)
 
         #This flips the display every frame
         pygame.display.flip()
