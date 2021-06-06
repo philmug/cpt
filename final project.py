@@ -54,8 +54,10 @@ class Game:
         self.clock = pygame.time.Clock()
         self.Active = True
         self.load_data()
+        self.score_max = 0
+        self.highscore = 0
         self.level = 1
-        self.max_level = 4
+        self.max_level = 5
 
 
     # This function loads all the data need form the extra files we have
@@ -68,6 +70,10 @@ class Game:
         player_folder = path.join(img_folder, 'Hero')
         zombie_folder = path.join(img_folder,'individual enemy sprites')
         items_folder = path.join(sprites_folder, 'extra items')
+
+        self.highest_score = path.join(game_folder, 'highscore.txt')
+        with open(self.highest_score,"r") as f:
+            self.score_max = int(f.read())
 
         #This is getting the file for the first map, making the map and assigning its rect to a variable for later use
         self.map1 = maps(path.join(maps_folder, 'Map1.tmx'))
@@ -236,7 +242,6 @@ class Game:
         self.player = Player(self)
         self.all_sprites.add(self.player)
         self.camera = camera(Width, Height)
-        self.highscore = 0
         self.load_map()
         self.run()
 
@@ -293,7 +298,7 @@ class Game:
             #This checks if the player hits the exit and if it does then it adds on to the level variable
             #empties the all_sprites group and loads the next map
             hit_exit = pygame.sprite.spritecollide(self.player, self.exit, False)
-            if hit_exit:
+            if hit_exit and self.level < self.max_level:
                 self.level += 1
                 self.all_sprites.empty()
                 self.load_map()
