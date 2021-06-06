@@ -1,11 +1,13 @@
-#these lines import pygame, mixer which is from mixer, random, os and csv
 import pygame
 from pygame import mixer
+import random
+import os
+import csv
 
-
-#This imports everything from the settings file, sprites file, the camera file and imports the path function from os
+#This imports everything from the settings file and sprites file
 from Settings import *
 from sprites import *
+from os import path
 from Camera_maps import *
 from os import path
 
@@ -286,9 +288,9 @@ class Game:
                 self.load_map()
 
 
-            hit_final_exit = pygame.sprite.spritecollide(self.player, self.exit_final, False)
+            hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
             if hit_final_exit:
-                self.Active = False
+                self.game.Active = False
 
 
     def draw(self):

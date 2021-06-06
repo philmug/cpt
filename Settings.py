@@ -59,6 +59,9 @@ Lightgrey= (100, 100, 100)
 map1_height = 25 * Tilesize
 map1_length = 90 * Tilesize
 
+#font
+font_name = pygame.font.match_font('arial')
+
 pygame.init()
 
 #adds music and volume
