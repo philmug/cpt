@@ -31,6 +31,18 @@ def draw_player_health(surf, x, y, pct):
     pygame.draw.rect(surf, White, outline_rect, 2)
 
 
+score = 0
+
+def draw_score(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, White)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
+
+
+
 
 
 # this is the game class
@@ -268,7 +280,6 @@ class Game:
 
 
 
-
     def events(self):
         #this for loop is processing events
         for event in pygame.event.get():
@@ -288,9 +299,9 @@ class Game:
                 self.load_map()
 
 
-            hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
-            if hit_final_exit:
-                self.game.Active = False
+            # hit_final_exit = pygame.sprite.spritecollide(self, self.game.exit_final, False)
+           # if hit_final_exit:
+               # self.game.Active = False
 
 
     def draw(self):
@@ -322,6 +333,10 @@ class Game:
         # yet it will still work because they have conditions that need to be meet before playing
         self.player.fade_Black()
         self.player.death_Fade()
+
+        draw_score(self.screen, str(score), 18, Width / 2, 10)
+
+
 
         #This flips the display every frame
         pygame.display.flip()
