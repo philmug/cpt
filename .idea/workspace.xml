@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="most of the comments doen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
-    </list>
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="finished 90% of comments" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -374,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622836350309</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="finished 90% of comments">
+      <created>1622948499188</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1622948499189</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -414,7 +417,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="imported pygame" />
     <MESSAGE value="imported pygame, created the window and fps variables, initiated pygame, pygame mixer, created the window size and started on the game loop." />
     <MESSAGE value="created skeleton of game loop and created colour variables" />
     <MESSAGE value="organized the game code and made a file called settings which hold main variables like window size and fps" />
@@ -439,7 +441,8 @@
     <MESSAGE value="got transitions to work" />
     <MESSAGE value="map changes" />
     <MESSAGE value="most of the comments doen" />
-    <option name="LAST_COMMIT_MESSAGE" value="most of the comments doen" />
+    <MESSAGE value="finished 90% of comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished 90% of comments" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
