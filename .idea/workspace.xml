@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="map changes">
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="most of the comments doen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Camera_maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Camera_maps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
@@ -368,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622654377919</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="most of the comments doen">
+      <created>1622836350309</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1622836350309</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -408,7 +414,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="is this working" />
     <MESSAGE value="imported pygame" />
     <MESSAGE value="imported pygame, created the window and fps variables, initiated pygame, pygame mixer, created the window size and started on the game loop." />
     <MESSAGE value="created skeleton of game loop and created colour variables" />
@@ -433,7 +438,8 @@
     <MESSAGE value="added highscore file" />
     <MESSAGE value="got transitions to work" />
     <MESSAGE value="map changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="map changes" />
+    <MESSAGE value="most of the comments doen" />
+    <option name="LAST_COMMIT_MESSAGE" value="most of the comments doen" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
