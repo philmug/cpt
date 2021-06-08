@@ -35,6 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.death_fade_complete = True
         self.fade_counter = 0
         self.screen = pygame.display.set_mode((Width, Height))
+        self.player_flip = False
 
     #this is the function testing horizontal collision
     def wallCollisions(self, platforms):
@@ -143,12 +144,16 @@ class Player(pygame.sprite.Sprite):
         #these lines check for what keys the player has pressed and modify the characters accleration based on that
         if Key[pygame.K_d] and Key[pygame.K_LSHIFT]:
             self.acc.x = player_acc * 2
+            self.player_flip = False
         elif Key[pygame.K_a] and Key[pygame.K_LSHIFT]:
             self.acc.x = -player_acc * 2
+            self.player_flip = True
         elif Key[pygame.K_a]:
             self.acc.x = -player_acc
+            self.player_flip = True
         elif Key[pygame.K_d]:
             self.acc.x = player_acc
+            self.player_flip = False
 
         #these lines call on the horizontal collision function and calculates the players acceleration, velocity and position
         self.wallCollisions(self.game.platforms)
@@ -211,7 +216,7 @@ class Player(pygame.sprite.Sprite):
         if coin_hits:
             self.score += coin_score
 
-
+        self.image = pygame.transform.flip(self.game.player_img, self.player_flip, False)
 
 
 class Arrow(pygame.sprite.Sprite):

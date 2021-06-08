@@ -1,5 +1,4 @@
 import pygame
-import self
 from pygame import mixer
 import random
 import os
@@ -146,10 +145,11 @@ class Game:
         self.map4_rect = self.map4_img.get_rect()
 
         # this is assigning the sprites for the character, enemies, coins and the arrow to their respective variables
-        self.player_img = pygame.image.load(path.join(player_folder, 'player_right1.png')).convert_alpha()
+        self.player_img = pygame.image.load(path.join(player_folder, 'soldier_right1.png')).convert_alpha()
         self.zombie_img = pygame.image.load(path.join(zombie_folder, 'enemy_left1.png')).convert_alpha()
         self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
         self.bullet_img = pygame.image.load(path.join(items_folder, 'arrow_silver.png')).convert_alpha()
+
 
 
         self.dir = path.dirname(__file__)
@@ -386,10 +386,7 @@ class Game:
         #This flips the display every frame
         pygame.display.flip()
 
-    def help_menu(self):
-        menu = True
-
-        back_button = button(White, 435, 300, Width / 9, Height / 9, "Back")
+#menus for main menu and pause
 
     def pause_menu(self):
         #display
@@ -399,12 +396,17 @@ class Game:
 
         # check for user input
         for event in pygame.event.get():
-            if event.type == pygame.K_q:
+            if event.type == pygame.K_p:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if quit_button.Is_Over(self.mouse_pos):
                         self.playing = False
                         game.main_menu()
 
+                        pygame.display.update()
+
+
+# menu settings
+    menu_background = pygame.image.load("img/Hero/mainbackground1.jpeg")
 
     def main_menu(self):
         menu = True
@@ -414,11 +416,10 @@ class Game:
         quit_button = button(Red, 435, 400, Width / 9, Height / 9, "Quit")
         help_button = button(White, 435, 300, Width / 9, Height / 9, "Help")
 
-
-
         while menu:
 
             mouse_pos = pygame.mouse.get_pos()
+
 
             play_button.draw(self.screen, White)
             quit_button.draw(self.screen, White)
@@ -428,6 +429,11 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button.Is_Over(mouse_pos):
                         menu = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if help_button.Is_Over(mouse_pos):
+                        menu = False
+                        help_menu = True
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if quit_button.Is_Over(mouse_pos):
                         menu = False
@@ -464,6 +470,24 @@ class Game:
                 pygame.display.update()
                 clock.tick(FPS)
                 pygame.display.set_caption("Until Death")
+# help section code
+    def help_menu(self):
+        help_menu = True
+
+        help_back_button = button(White, 400, 400, Width / 5, Height / 9, "Continue")
+
+        while help_menu:
+
+            help_back_button.draw(self.screen, White)
+
+            mouse_pos = pygame.mouse.get_pos()
+
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if help_back_button.Is_Over(mouse_pos):
+                        menu = True
+                        help_menu = False
+                        pygame.display.update()
 
     def show_start_screen(self):
         pass

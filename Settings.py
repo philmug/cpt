@@ -66,8 +66,9 @@ font_name = pygame.font.match_font('arial')
 pygame.init()
 
 #adds music and volume
-#sound = pygame.mixer.Sound('lvl1.wav')
-# sound.play()
+sound = pygame.mixer.Sound('lvl1.wav')
+sound.set_volume(0.03)
+sound.play(-1)
 
 
 
