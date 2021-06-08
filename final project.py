@@ -1,8 +1,10 @@
 import pygame
+import self
 from pygame import mixer
 import random
 import os
 import csv
+import sys
 
 #This imports everything from the settings file and sprites file
 from Settings import *
@@ -10,6 +12,8 @@ from sprites import *
 from os import path
 from Camera_maps import *
 from os import path
+from pygame.locals import *
+
 
 # player health
 def draw_player_health(surf, x, y, pct):
@@ -40,6 +44,53 @@ def draw_score(surf, text, size, x, y):
     text_rect.midtop = (x, y)
     surf.blit(text_surface, text_rect)
 
+# Main Menu
+screen = pygame.display.set_mode((Width, Height))
+
+
+def text_format(message, textFont, textSize, textColor):
+    newFont = pygame.font.Font(textFont, textSize)
+    newText = newFont.render(message, 0, textColor)
+
+    return newText
+
+#code for button
+class button():
+    def __init__(self, color, x, y, width, height, text=''):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+
+    def draw(self, win, outline=None):
+        # Call this method to draw the button on the screen
+        if outline:
+            pygame.draw.rect(win, outline, (self.x - 2, self.y - 2, self.width + 4, self.height + 4), 0)
+
+        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height), 0)
+
+        if self.text != '':
+            font = pygame.font.SysFont('comicsans', 60)
+            text = font.render(self.text, 1, (0, 0, 0))
+            win.blit(text, (
+            self.x + (self.width / 2 - text.get_width() / 2), self.y + (self.height / 2 - text.get_height() / 2)))
+
+    def Is_Over(self, pos):
+        # checks if a given position is over the button
+        if self.x - self.width / 2 < pos[0] < self.x + self.width / 2:
+            if self.y - self.height / 2 < pos[1] < self.y + self.height / 2:
+                return True
+        else:
+            return False
+
+
+
+font = pygame.font.get_default_font()
+
+clock = pygame.time.Clock()
+
 # this is the game class
 class Game:
     #this initiates the class and creates the variables the will be used later in the class
@@ -47,7 +98,7 @@ class Game:
         #This is initiating pygame and the pygame mixer and it creates the window size
         pygame.init()
         pygame.mixer.init()
-        self.screen= pygame.display.set_mode((Width, Height))
+        self.screen = pygame.display.set_mode((Width, Height))
 
         #this mkaes the game name apear on the to of the window
         pygame.display.set_caption(Title)
@@ -58,7 +109,6 @@ class Game:
         self.highscore = 0
         self.level = 1
         self.max_level = 5
-
 
     # This function loads all the data need form the extra files we have
     def load_data(self):
@@ -108,6 +158,7 @@ class Game:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
+
 
     #this function loads the platfroms and hit boxes in the maps
     def load_map(self):
@@ -228,6 +279,7 @@ class Game:
                     Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                     self.Spikes.add(Spikes_new)
 
+
     #This function creates initiates all of the groups and calls on the load_map and run functions
     def new(self):
         self.all_sprites = pygame.sprite.Group()
@@ -257,7 +309,6 @@ class Game:
             self.update()
             self.draw()
 
-
     def update(self):
         #This is updating all the sprites
         self.all_sprites.update()
@@ -282,9 +333,6 @@ class Game:
                 i.pos.y = hits_zombie[0].rect.top
                 i.vel.y = 0
 
-
-
-
     def events(self):
         #this for loop is processing events
         for event in pygame.event.get():
@@ -302,10 +350,6 @@ class Game:
                 self.level += 1
                 self.all_sprites.empty()
                 self.load_map()
-
-
-
-
 
     def draw(self):
         #remouve this later
@@ -342,6 +386,85 @@ class Game:
         #This flips the display every frame
         pygame.display.flip()
 
+    def help_menu(self):
+        menu = True
+
+        back_button = button(White, 435, 300, Width / 9, Height / 9, "Back")
+
+    def pause_menu(self):
+        #display
+        quit_button = button(Red, 435, 400, Width / 9, Height / 9, "Quit")
+        quit_button.Draw(self.screen, White)
+        self.displayText(White, 200, 200, Width / 5, Height / 5, "Paused")
+
+        # check for user input
+        for event in pygame.event.get():
+            if event.type == pygame.K_q:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if quit_button.Is_Over(self.mouse_pos):
+                        self.playing = False
+                        game.main_menu()
+
+
+    def main_menu(self):
+        menu = True
+        selected = "start"
+
+        play_button = button(Green, 435, 200, Width / 9, Height / 9, "Start")
+        quit_button = button(Red, 435, 400, Width / 9, Height / 9, "Quit")
+        help_button = button(White, 435, 300, Width / 9, Height / 9, "Help")
+
+
+
+        while menu:
+
+            mouse_pos = pygame.mouse.get_pos()
+
+            play_button.draw(self.screen, White)
+            quit_button.draw(self.screen, White)
+            help_button.draw(self.screen, White)
+
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if play_button.Is_Over(mouse_pos):
+                        menu = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if quit_button.Is_Over(mouse_pos):
+                        menu = False
+                        pygame.quit()
+                        sys.exit()
+
+                # Main Menu UI
+                screen.fill
+                title = text_format("Until Death", font, 90, Yellow)
+                if selected == "start":
+                    text_start = text_format("Start", font, 75, White)
+                else:
+                    text_start = text_format("Start", font, 75, Black)
+                if selected == "quit":
+                    text_quit = text_format("Quit", font, 75, White)
+                else:
+                    text_quit = text_format("Quit", font, 75, White)
+                if selected == "help":
+                    text_help = text_format("Help", font, 75, White)
+                else:
+                    text_help = text_format("Help", font, 75, White)
+                if selected == "about":
+                    text_about = text_format("By Cristian S, Phil M and Josh M", font, 20, White)
+                else:
+                    text_about = text_format("By Cristian S, PhIl M and Josh M", font, 20, White)
+
+                title_rect = title.get_rect()
+                start_rect = text_start.get_rect()
+                quit_rect = text_quit.get_rect()
+
+                # Main Menu Text
+                screen.blit(title, (Width / 2 - (title_rect[2] / 2), 80))
+                screen.blit(text_about, (Width / 2 - (start_rect[2] / 1), 520))
+                pygame.display.update()
+                clock.tick(FPS)
+                pygame.display.set_caption("Until Death")
+
     def show_start_screen(self):
         pass
 
@@ -354,6 +477,7 @@ game.show_start_screen()
 
 #this is the main game loop
 while game.Active:
+    game.main_menu()
     game.new()
     game.show_gameover_screen()
 

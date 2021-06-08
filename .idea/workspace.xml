@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="added clock and true score">
+      <change afterPath="$PROJECT_DIR$/img/PIPOYA FREE RPG Character Sprites 32x32/images.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-31_2_26_p_m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-05-31_2_26_p_m___Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_5_2021_11_35_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highscore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/highscore.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +41,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/sprites.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/final project.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Settings.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Camera_maps.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">

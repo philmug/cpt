@@ -62,6 +62,7 @@ map1_length = 90 * Tilesize
 #font
 font_name = pygame.font.match_font('arial')
 
+
 pygame.init()
 
 #adds music and volume
