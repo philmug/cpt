@@ -397,7 +397,7 @@ class Game:
 
         while menu:
 
-# getting the user's mouse position
+# getting the user's mouse position to check if buttons are being pressed
             mouse_pos = pygame.mouse.get_pos()
 
 #drawing the buttons on the screen made just above
@@ -415,7 +415,7 @@ class Game:
                         pygame.quit()
                         sys.exit()
 
-                # Main Menu UI
+                # Main Menu UI / writes this text in the main menu
                 screen.fill
                 title = text_format("Until Death", font, 80, Yellow)
                 if selected == "start":
@@ -471,7 +471,7 @@ class Game:
                 start_rect = text_start.get_rect()
                 quit_rect = text_quit.get_rect()
 
-                # Main Menu Text
+                # blitting the screen to make the text actually appear on the menu screen
                 screen.blit(title, (Width / 2 - (title_rect[2] / 2), 80))
                 screen.blit(text_about, (Width / 2 - (start_rect[2] / 1), 520))
                 screen.blit(text_support, (Width / 4 - (start_rect[2] / 1), 260))
@@ -484,6 +484,7 @@ class Game:
                 screen.blit(text_objective4, (Width / 1.33 - (start_rect[2] / 1), 350))
                 pygame.display.update()
                 clock.tick(FPS)
+# again giving the caption at the top of the screen a name
                 pygame.display.set_caption("Until Death")
 
 # end screen code
@@ -496,7 +497,7 @@ class Game:
         menu_button = button(Yellow, 435, 400, Width / 8, Height / 9, "Menu")
         gameover_button = button(Red, 325, 50, Width / 3, Height / 5, "GAME OVER")
 
-#draws the user's score and the all time high score on the final end screen
+#draws the user's score and the all time high score and prints on the final end screen
         draw_score(self.screen, "Your Score:   "+str(self.highscore), 25, Width / 2, Height / 2)
         draw_score(self.screen, "Highest Score:   " + str(self.score_max), 25, Width / 2, Height / 2.5)
 
@@ -504,7 +505,7 @@ class Game:
         while endscreen:
 
             clock.tick(FPS)
-# again finding mouse position
+# again finding the user's mouse position to check if clicking buttons
             mouse_pos = pygame.mouse.get_pos()
 
 # drawing end + menu + game over buttons; game over button has no function is just text
