@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="end screen fixed + highscore and all time highscore added to final screen">
+    <list default="true" id="b1eb774a-0d8d-4d57-a28b-0e60867e7572" name="Default Changelist" comment="added comments to menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final project.py" beforeDir="false" afterPath="$PROJECT_DIR$/final project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/highscore.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,7 +415,21 @@
       <option name="project" value="LOCAL" />
       <updated>1623206106607</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="end screen fixed + highscore and all time highscore added to final screen">
+      <created>1623247165080</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1623247165080</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added comments to menu">
+      <created>1623247362613</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1623247362613</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -455,7 +469,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="created sprites file" />
     <MESSAGE value="finished player movement and sprinting" />
     <MESSAGE value="finished window movement" />
     <MESSAGE value="did the intro for the tile game" />
@@ -480,7 +493,8 @@
     <MESSAGE value="added clock and true score" />
     <MESSAGE value="simple animation + music added back" />
     <MESSAGE value="end screen fixed + highscore and all time highscore added to final screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="end screen fixed + highscore and all time highscore added to final screen" />
+    <MESSAGE value="added comments to menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added comments to menu" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sans.py">
