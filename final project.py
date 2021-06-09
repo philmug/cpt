@@ -103,11 +103,11 @@ class Game:
         pygame.display.set_caption(Title)
         self.clock = pygame.time.Clock()
         self.Active = True
-        self.load_data()
         self.score_max = 0
         self.highscore = 0
         self.level = 1
         self.max_level = 5
+        self.load_data()
 
     # This function loads all the data need form the extra files we have
     def load_data(self):
@@ -122,7 +122,7 @@ class Game:
 
         self.highest_score = path.join(game_folder, 'highscore.txt')
         with open(self.highest_score,"r") as f:
-            self.score_max = int(f.read())
+            self.score_max = int(f.readline())
 
         #This is getting the file for the first map, making the map and assigning its rect to a variable for later use
         self.map1 = maps(path.join(maps_folder, 'Map1.tmx'))
@@ -508,39 +508,50 @@ class Game:
                 clock.tick(FPS)
                 pygame.display.set_caption("Until Death")
 
+# end screen
     def end_screen(self):
         endscreen = True
+        screen.fill(Black)
 
-        end_button = button(Red, 435, 250, Width / 9, Height / 9, "End")
+        end_button = button(Red, 435, 500, Width / 8, Height / 9, "End")
+        menu_button = button(Yellow, 435, 400, Width / 8, Height / 9, "Menu")
+        gameover_button = button(Red, 325, 50, Width / 3, Height / 5, "GAME OVER")
+
+        draw_score(self.screen, "Your Score:   "+str(self.highscore), 25, Width / 2, Height / 2)
+        draw_score(self.screen, "Highest Score:   " + str(self.score_max), 25, Width / 2, Height / 2.5)
 
 
         while endscreen:
 
+            clock.tick(FPS)
+
             mouse_pos = pygame.mouse.get_pos()
 
             end_button.draw(self.screen, White)
+            menu_button.draw(self.screen, White)
+            gameover_button.draw(self.screen, Red)
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if end_button.Is_Over(mouse_pos):
-                        menu = False
                         pygame.quit()
                         sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if menu_button.Is_Over(mouse_pos):
+                        self.level = 1
+                        endscreen = False
 
-    def show_start_screen(self):
-        pass
 
-    def show_end_screen(self):
-        pass
+            pygame.display.flip()
 
 #This calls on the game class
 game = Game()
-game.show_start_screen()
 
 #this is the main game loop
 while game.Active:
     game.main_menu()
     game.new()
+
 
 
 #this ends the game

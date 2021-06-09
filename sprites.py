@@ -189,8 +189,6 @@ class Player(pygame.sprite.Sprite):
                 self.death_fade_complete = False
 
 
-
-
         #this checks if the player is colliding with a exit block and if the fade black animation is not playing
         # it resets the fade counter, adds one to the level variable, loads the next map and starts the fade animation
         hit_exit = pygame.sprite.spritecollide(self, self.game.exit, False)
@@ -208,7 +206,7 @@ class Player(pygame.sprite.Sprite):
                     with open(self.game.highest_score, 'w') as f:
                         f.write(str(self.game.highscore))
                 self.game.playing = False
-                self.game.Active = False
+                self.game.end_screen()
 
 
         #this checks if the player hits the coin, if it does it deletes the coin and adds to the score
