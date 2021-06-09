@@ -397,6 +397,8 @@ class Game:
         # check for user input
         for event in pygame.event.get():
             if event.type == pygame.K_p:
+                screen.fill(Black)
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if quit_button.Is_Over(self.mouse_pos):
                         self.playing = False
@@ -406,14 +408,14 @@ class Game:
 
 
 # menu settings
-    menu_background = pygame.image.load("img/Hero/mainbackground1.jpeg")
+    menu_background = pygame.image.load("img/backgrounds/mainbackground1.jpeg")
 
     def main_menu(self):
         menu = True
         selected = "start"
 
-        play_button = button(Green, 435, 200, Width / 9, Height / 9, "Start")
-        quit_button = button(Red, 435, 400, Width / 9, Height / 9, "Quit")
+        play_button = button(Green, 435, 250, Width / 9, Height / 9, "Start")
+        quit_button = button(Red, 435, 350, Width / 9, Height / 9, "Quit")
         help_button = button(White, 435, 300, Width / 9, Height / 9, "Help")
 
         while menu:
@@ -423,17 +425,12 @@ class Game:
 
             play_button.draw(self.screen, White)
             quit_button.draw(self.screen, White)
-            help_button.draw(self.screen, White)
+
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button.Is_Over(mouse_pos):
                         menu = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if help_button.Is_Over(mouse_pos):
-                        menu = False
-                        help_menu = True
-
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if quit_button.Is_Over(mouse_pos):
                         menu = False
@@ -442,7 +439,7 @@ class Game:
 
                 # Main Menu UI
                 screen.fill
-                title = text_format("Until Death", font, 90, Yellow)
+                title = text_format("Until Death", font, 80, Yellow)
                 if selected == "start":
                     text_start = text_format("Start", font, 75, White)
                 else:
@@ -459,6 +456,38 @@ class Game:
                     text_about = text_format("By Cristian S, Phil M and Josh M", font, 20, White)
                 else:
                     text_about = text_format("By Cristian S, PhIl M and Josh M", font, 20, White)
+                if selected == "support":
+                    text_support = text_format("A / D + Shift to move / sprint", font, 20, White)
+                else:
+                    text_support = text_format("A / D + Shift to move / sprint", font, 20, White)
+                if selected == "jump":
+                    text_jump = text_format("Use SPACEBAR to jump", font, 20, White)
+                else:
+                    text_jump = text_format("Use SPACEBAR to jump", font, 20, White)
+                if selected == "objective1":
+                    text_objective1 = text_format("Reach the door to complete the level", font, 20, White)
+                else:
+                    text_objective1 = text_format("Reach the door to complete the level", font, 20, White)
+                if selected == "controls":
+                    text_controls = text_format("Controls", font, 35, Blue)
+                else:
+                    text_controls = text_format("Controls", font, 35, Blue)
+                if selected == "objective":
+                    text_objective = text_format("Objective", font, 35, Blue)
+                else:
+                    text_objective = text_format("Objective", font, 35, Blue)
+                if selected == "objective2":
+                    text_objective2 = text_format("Finish the game as fast as possible", font, 20, White)
+                else:
+                    text_objective2 = text_format("Finish the game as fast as possible", font, 20, White)
+                if selected == "objective3":
+                    text_objective3 = text_format("Collect coins to increase your score", font, 20, White)
+                else:
+                    text_objective3 = text_format("Collect coins to increase your score", font, 20, White)
+                if selected == "objective4":
+                    text_objective4 = text_format("Make sure to dodge skeletons and spikes", font, 20, White)
+                else:
+                    text_objective4= text_format("Make sure to dodge skeletons and spikes", font, 20, White)
 
                 title_rect = title.get_rect()
                 start_rect = text_start.get_rect()
@@ -467,32 +496,41 @@ class Game:
                 # Main Menu Text
                 screen.blit(title, (Width / 2 - (title_rect[2] / 2), 80))
                 screen.blit(text_about, (Width / 2 - (start_rect[2] / 1), 520))
+                screen.blit(text_support, (Width / 4 - (start_rect[2] / 1), 260))
+                screen.blit(text_jump, (Width / 3.75 - (start_rect[2] / 1), 290))
+                screen.blit(text_objective1, (Width / 1.30 - (start_rect[2] / 1), 260))
+                screen.blit(text_controls, (Width / 3.25 - (start_rect[2] / 1), 215))
+                screen.blit(text_objective, (Width / 1.15 - (start_rect[2] / 1), 215))
+                screen.blit(text_objective2, (Width / 1.30 - (start_rect[2] / 1), 290))
+                screen.blit(text_objective3, (Width / 1.30 - (start_rect[2] / 1), 320))
+                screen.blit(text_objective4, (Width / 1.33 - (start_rect[2] / 1), 350))
                 pygame.display.update()
                 clock.tick(FPS)
                 pygame.display.set_caption("Until Death")
-# help section code
-    def help_menu(self):
-        help_menu = True
 
-        help_back_button = button(White, 400, 400, Width / 5, Height / 9, "Continue")
+    def end_screen(self):
+        endscreen = True
 
-        while help_menu:
+        end_button = button(Red, 435, 250, Width / 9, Height / 9, "End")
 
-            help_back_button.draw(self.screen, White)
+
+        while endscreen:
 
             mouse_pos = pygame.mouse.get_pos()
 
+            end_button.draw(self.screen, White)
+
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if help_back_button.Is_Over(mouse_pos):
-                        menu = True
-                        help_menu = False
-                        pygame.display.update()
+                    if end_button.Is_Over(mouse_pos):
+                        menu = False
+                        pygame.quit()
+                        sys.exit()
 
     def show_start_screen(self):
         pass
 
-    def show_gameover_screen(self):
+    def show_end_screen(self):
         pass
 
 #This calls on the game class
@@ -503,7 +541,7 @@ game.show_start_screen()
 while game.Active:
     game.main_menu()
     game.new()
-    game.show_gameover_screen()
+
 
 #this ends the game
 pygame.quit()
