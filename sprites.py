@@ -217,36 +217,6 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.flip(self.game.player_img, self.player_flip, False)
 
 
-class Arrow(pygame.sprite.Sprite):
-    def __init__(self, game, x, y, direction):
-        pygame.sprite.Sprite.__init__(self)
-        self.speed = 10
-        self.game = game
-        self.image = game.bullet_img
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
-        self.direction = direction
-
-    def update(self):
-        # move arrow
-        self.rect.x += (self.direction * self.speed) + screen_scroll
-        # check for collision with level
-        for tile in world.obstacle_list:
-            if tile[1].colliderect(self.rect):
-                self.kill()
-
-        # check collision with characters
-        if pygame.sprite.spritecollide(player, arrow_group, False):
-            if player.alive:
-                player.health -= 5
-                self.kill()
-        for enemy in enemy_group:
-            if pygame.sprite.spritecollide(enemy, arrow_group, False):
-                if enemy.alive:
-                    enemy.health -= 25
-                    self.kill()
-
-
 #this is the zombie class
 class Zombie(pygame.sprite.Sprite):
     #this initiates the class and creates the variables used in the class
