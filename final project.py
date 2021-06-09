@@ -150,8 +150,6 @@ class Game:
         self.coin_img = pygame.image.load(path.join(items_folder, 'coin_gold.png')).convert_alpha()
         self.bullet_img = pygame.image.load(path.join(items_folder, 'arrow_silver.png')).convert_alpha()
 
-
-
         self.dir = path.dirname(__file__)
         with open(path.join(self.dir, Hs_File), 'w') as f:
             try:
@@ -279,7 +277,6 @@ class Game:
                     Spikes_new = Spikes(tile_object.x, tile_object.y, tile_object.width, tile_object.height)
                     self.Spikes.add(Spikes_new)
 
-
     #This function creates initiates all of the groups and calls on the load_map and run functions
     def new(self):
         self.all_sprites = pygame.sprite.Group()
@@ -386,47 +383,28 @@ class Game:
         #This flips the display every frame
         pygame.display.flip()
 
-#menus for main menu and pause
-
-    def pause_menu(self):
-        #display
-        quit_button = button(Red, 435, 400, Width / 9, Height / 9, "Quit")
-        quit_button.Draw(self.screen, White)
-        self.displayText(White, 200, 200, Width / 5, Height / 5, "Paused")
-
-        # check for user input
-        for event in pygame.event.get():
-            if event.type == pygame.K_p:
-                screen.fill(Black)
-
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if quit_button.Is_Over(self.mouse_pos):
-                        self.playing = False
-                        game.main_menu()
-
-                        pygame.display.update()
-
-
 # menu settings
     menu_background = pygame.image.load("img/backgrounds/mainbackground1.jpeg")
-
+# defining main menu
     def main_menu(self):
         menu = True
         selected = "start"
 
+# creating buttons for main menu
         play_button = button(Green, 435, 250, Width / 9, Height / 9, "Start")
         quit_button = button(Red, 435, 350, Width / 9, Height / 9, "Quit")
         help_button = button(White, 435, 300, Width / 9, Height / 9, "Help")
 
         while menu:
 
+# getting the user's mouse position
             mouse_pos = pygame.mouse.get_pos()
 
-
+#drawing the buttons on the screen made just above
             play_button.draw(self.screen, White)
             quit_button.draw(self.screen, White)
 
-
+# for loop staing if the play button is click, the menu will close and the game will start. if the quit button is pressed game will end
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button.Is_Over(mouse_pos):
@@ -508,15 +486,17 @@ class Game:
                 clock.tick(FPS)
                 pygame.display.set_caption("Until Death")
 
-# end screen
+# end screen code
     def end_screen(self):
         endscreen = True
         screen.fill(Black)
 
+# creating buttons for end screen
         end_button = button(Red, 435, 500, Width / 8, Height / 9, "End")
         menu_button = button(Yellow, 435, 400, Width / 8, Height / 9, "Menu")
         gameover_button = button(Red, 325, 50, Width / 3, Height / 5, "GAME OVER")
 
+#draws the user's score and the all time high score on the final end screen
         draw_score(self.screen, "Your Score:   "+str(self.highscore), 25, Width / 2, Height / 2)
         draw_score(self.screen, "Highest Score:   " + str(self.score_max), 25, Width / 2, Height / 2.5)
 
@@ -524,13 +504,15 @@ class Game:
         while endscreen:
 
             clock.tick(FPS)
-
+# again finding mouse position
             mouse_pos = pygame.mouse.get_pos()
 
+# drawing end + menu + game over buttons; game over button has no function is just text
             end_button.draw(self.screen, White)
             menu_button.draw(self.screen, White)
             gameover_button.draw(self.screen, Red)
 
+# when user presses quit button game will quit, when user presses menu button game will go menu and reset at level 1
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if end_button.Is_Over(mouse_pos):
@@ -551,8 +533,6 @@ game = Game()
 while game.Active:
     game.main_menu()
     game.new()
-
-
 
 #this ends the game
 pygame.quit()
