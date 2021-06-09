@@ -24,6 +24,7 @@ def draw_player_health(surf, x, y, pct):
     fill = pct * Bar_length
     outline_rect = pygame.Rect(x, y, Bar_length, Bar_height)
     fill_rect = pygame.Rect(x, y, fill, Bar_height)
+  # colour for bars
     if pct > 100:
         col = Green
     elif pct > 60:
@@ -33,9 +34,10 @@ def draw_player_health(surf, x, y, pct):
     pygame.draw.rect(surf, col, fill_rect)
     pygame.draw.rect(surf, White, outline_rect, 2)
 
-
+# set score to 0
 score = 0
 
+# defining surf, text, size, x, y for score
 def draw_score(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, White)
